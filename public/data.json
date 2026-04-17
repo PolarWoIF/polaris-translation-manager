@@ -1,0 +1,655 @@
+{
+  "lastUpdated": "2026-04-17T17:11:43Z",
+  "categories": [
+    "Action",
+    "Adventure",
+    "RPG",
+    "Simulation"
+  ],
+  "games": [
+    {
+      "id": "amnesia-the-bunker",
+      "title": "Amnesia: The Bunker",
+      "category": "Adventure",
+      "rating": 4.7,
+      "description": "Amnesia: The Bunker is a first-person horror game set in a WW1 bunker. A relentless, AI-driven monster stalks you. Survival depends on finding tools, crafting items, and keeping the lights on. Steam reviews: 94% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1944430/header.jpg?t=1773329066",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1944430/header.jpg?t=1773329066",
+      "executable": "",
+      "translations": [
+        {
+          "id": "amnesia-the-bunker-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Amnesia: The Bunker.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Amnesia_The_Bunker/ar/v1/Amnesia_etrdream.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "34.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "bad-north",
+      "title": "Bad North: Jotunn Edition",
+      "category": "Simulation",
+      "rating": 4.7,
+      "description": "Bad North is a charming but brutal real-time tactics roguelite. Defend your idyllic island kingdom against a horde of Viking invaders, as you lead the desperate exodus of your people. Command your loyal subjects to take full tactical advantage of the unique shape of each island. Steam reviews: 93.1% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/688420/header.jpg?t=1766091313",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/688420/header.jpg?t=1766091313",
+      "executable": "",
+      "translations": [
+        {
+          "id": "bad-north-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Bad North: Jotunn Edition.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Bad_north/ar/v1/BadNorth_Data.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "41.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "clair-obscur-expedition-33",
+      "title": "Clair Obscur: Expedition 33",
+      "category": "RPG",
+      "rating": 4.8,
+      "description": "Lead the members of Expedition 33 on their quest to destroy the Paintress so that she can never paint death again. Explore a world of wonders inspired by Belle Epoque France and battle unique enemies in this turn-based RPG with real-time mechanics. Steam reviews: 96.7% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1773676780",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1903340/be3305b02d4db0dffa3458537118423bf2792d7e/header.jpg?t=1773676780",
+      "executable": "Sandfall-Win64-Shipping.exe",
+      "translations": [
+        {
+          "id": "clair-obscur-expedition-33-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Clair Obscur: Expedition 33.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Clair_obscur_Expedition33/ar/v1/Sandfall.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "9.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "codevein",
+      "title": "CODE VEIN",
+      "category": "RPG",
+      "rating": 4.3,
+      "description": "In the face of certain death, we rise. Team up and embark on a journey to the ends of hell to unlock your past and escape your living nightmare in CODE VEIN. Steam reviews: 86.4% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/678960/header.jpg?t=1766015412",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/678960/header.jpg?t=1766015412",
+      "executable": "",
+      "translations": [
+        {
+          "id": "codevein-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for CODE VEIN.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/CodeVein/ar/v1/CodeVein.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "2.1 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "code-vein-2",
+      "title": "CODE VEIN II",
+      "category": "RPG",
+      "rating": 3.2,
+      "description": "An epic adventure awaits, where you and your chosen partners explore a post-apocalyptic world, face fierce battles against powerful enemies, and uncover an epic story that transcends time. Steam reviews: 63.1% positive (Mixed).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2362060/955e8f3fce6d832c286ac8013657ed6fc51f1f85/header.jpg?t=1770242240",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2362060/955e8f3fce6d832c286ac8013657ed6fc51f1f85/header.jpg?t=1770242240",
+      "executable": "",
+      "translations": [
+        {
+          "id": "code-vein-2-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for CODE VEIN II.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/code_vein_2/ar/v1/CodeVein2.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "2.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "cuphead",
+      "title": "Cuphead",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "Cuphead is a classic run and gun action game heavily focused on boss battles. Inspired by cartoons of the 1930s, the visuals and audio are painstakingly created with the same techniques of the era, i.e. traditional hand drawn cel animation, watercolor backgrounds, and original jazz recordings. Steam reviews: 96.1% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268910/header.jpg?t=1709068852",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268910/header.jpg?t=1709068852",
+      "executable": "",
+      "translations": [
+        {
+          "id": "cuphead-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Cuphead.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Cuphead/ar/v1/Cuphead_Data.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "85.6 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "half-life",
+      "title": "Half-Life",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "Named Game of the Year by over 50 publications, Valve's debut title blends action and adventure with award-winning technology to create a frighteningly realistic world where players must think to survive. Also includes an exciting multiplayer mode that allows you to play against friends and enemies around the world. Steam reviews: 96.5% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/70/header.jpg?t=1745368462",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/70/header.jpg?t=1745368462",
+      "executable": "",
+      "translations": [
+        {
+          "id": "half-life-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Half-Life.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Half_Life/ar/v1/zwi2l3.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "66.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "hollow-knight",
+      "title": "Hollow Knight",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "Forge your own path in Hollow Knight! An epic action adventure through a vast ruined kingdom of insects and heroes. Explore twisting caverns, battle tainted creatures and befriend bizarre bugs, all in a classic, hand-drawn 2D style. Steam reviews: 96.9% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/3c3489495136b26b34f8a9543c7f5645b99d388c/header.jpg?t=1776125684",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/3c3489495136b26b34f8a9543c7f5645b99d388c/header.jpg?t=1776125684",
+      "executable": "hollow_knight.exe",
+      "translations": [
+        {
+          "id": "hollow-knight-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Hollow Knight.",
+          "releaseDate": "2026-04-16",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Hollow_Knight/ar/v1/Hollow_Knight.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "27.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "lethal-company",
+      "title": "Lethal Company",
+      "category": "Adventure",
+      "rating": 4.9,
+      "description": "A co-op horror about scavenging at abandoned moons to sell scrap to the Company. Steam reviews: 97.4% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1966720/header.jpg?t=1775380053",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1966720/header.jpg?t=1775380053",
+      "executable": "",
+      "translations": [
+        {
+          "id": "lethal-company-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Lethal Company.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Lethal_Company/ar/v1/LC_AR.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "nier-replicant",
+      "title": "NieR Replicant ver.1.22474487139...",
+      "category": "RPG",
+      "rating": 4.5,
+      "description": "The upgraded prequel of NieR:Automata. A kind young man sets out with Grimoire Weiss, a strange talking book, to search for the \"Sealed verses\" in order to save his sister Yonah, who fell terminally ill to the Black Scrawl. Steam reviews: 90.3% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1113560/header.jpg?t=1773365156",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1113560/header.jpg?t=1773365156",
+      "executable": "",
+      "translations": [
+        {
+          "id": "nier-replicant-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for NieR Replicant ver.1.22474487139....",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/NieR_Replicant/ar/v1/data.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "67.7 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "ori-and-the-will-of-the-wisps",
+      "title": "Ori and the Will of the Wisps",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "Play the critically acclaimed masterpiece. Embark on a new journey in a vast, exotic world where youll encounter towering enemies and challenging puzzles on your quest to unravel Oris destiny. Steam reviews: 96.8% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1057090/header.jpg?t=1759530749",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1057090/header.jpg?t=1759530749",
+      "executable": "",
+      "translations": [
+        {
+          "id": "ori-and-the-will-of-the-wisps-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Ori and the Will of the Wisps.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Ori_and_the_Will_of_the_Wisps/ar/v1/oriDE_Data.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "23.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "outlast-1",
+      "title": "Outlast",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "Hell is an experiment you can't survive in Outlast, a first-person survival horror game developed by veterans of some of the biggest game franchises in history. As investigative journalist Miles Upshur, explore Mount Massive Asylum and try to survive long enough to discover its terrible secret... if you dare. Steam reviews: 95.7% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg?t=1666817106",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/238320/header.jpg?t=1666817106",
+      "executable": "",
+      "translations": [
+        {
+          "id": "outlast-1-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Outlast.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/outlast_1/ar/v1/OLGame.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "59.8 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "outlast-2",
+      "title": "Outlast 2",
+      "category": "Adventure",
+      "rating": 4.3,
+      "description": "Outlast 2 introduces you to Sullivan Knoth and his followers, who left our wicked world behind to give birth to Temple Gate, a town, deep in the wilderness and hidden from civilization. Knoth and his flock are preparing for the tribulations of the end of times and youre right in the thick of it. Steam reviews: 85.4% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/414700/header.jpg?t=1618944453",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/414700/header.jpg?t=1618944453",
+      "executable": "",
+      "translations": [
+        {
+          "id": "outlast-2-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Outlast 2.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/outlast_2/ar/v1/OLGame.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "4.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "peak",
+      "title": "PEAK",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "PEAK is a co-op climbing game where the slightest mistake can spell your doom. Either solo or as a group of lost nature scouts, your only hope of rescue from a mysterious island is to scale the mountain at its center. Do you have what it takes to reach the PEAK Steam reviews: 95.5% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3527290/31bac6b2eccf09b368f5e95ce510bae2baf3cfcd/header.jpg?t=1775581133",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3527290/31bac6b2eccf09b368f5e95ce510bae2baf3cfcd/header.jpg?t=1775581133",
+      "executable": "",
+      "translations": [
+        {
+          "id": "peak-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for PEAK.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Peak/ar/v1/Peak.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "2.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "r-e-p-o",
+      "title": "R.E.P.O.",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "An online co-op horror game with up to 6 players. Locate valuable, fully physics-based objects and handle them with care as you retrieve and extract to satisfy your creator's desires. Steam reviews: 96.8% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3241660/1ea445e044a2d5b09cfa8291350b63ebed6e5741/header.jpg?t=1765552338",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3241660/1ea445e044a2d5b09cfa8291350b63ebed6e5741/header.jpg?t=1765552338",
+      "executable": "",
+      "translations": [
+        {
+          "id": "r-e-p-o-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for R.E.P.O..",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/R.E.P.O/ar/v1/REPO_ETRD%20v3.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.8 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "silent-hill-2-remake",
+      "title": "SILENT HILL 2",
+      "category": "Adventure",
+      "rating": 4.7,
+      "description": "Investigating a letter from his late wife, James returns to where they made so many memories - Silent Hill. What he finds is a ghost town, prowled by disturbing monsters and cloaked in deep fog. Confront the monsters, solve puzzles, and search for traces of your wife in this remake of SILENT HILL 2. Steam reviews: 94.7% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg?t=1744248682",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2124490/header.jpg?t=1744248682",
+      "executable": "",
+      "translations": [
+        {
+          "id": "silent-hill-2-remake-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for SILENT HILL 2.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Silent_Hill_2_Remake/ar/v1/SHProto.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "5.1 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "silent-hill-f",
+      "title": "SILENT HILL f",
+      "category": "Adventure",
+      "rating": 4.1,
+      "description": "Hinako's hometown is engulfed in fog, driving her to fight grotesque monsters and solve eerie puzzles. Uncover the disturbing beauty hidden in terror. Steam reviews: 81.7% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2947440/7e5d923ac622bd1775ebc9b5d4b5b0a24bf5ed40/header.jpg?t=1770169624",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2947440/7e5d923ac622bd1775ebc9b5d4b5b0a24bf5ed40/header.jpg?t=1770169624",
+      "executable": "",
+      "translations": [
+        {
+          "id": "silent-hill-f-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for SILENT HILL f.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Silent_Hill_f/ar/v1/SHf.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "0.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "stellar-blade",
+      "title": "Stellar Blade",
+      "category": "RPG",
+      "rating": 4.8,
+      "description": "Save humanity from extinction in post-apocalyptic action-adventure Stellar Blade. Experience blistering combat and a twisting storyline as you unravel the mysteries of Earths downfall. Steam reviews: 95.5% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3489700/header.jpg?t=1773886328",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3489700/header.jpg?t=1773886328",
+      "executable": "",
+      "translations": [
+        {
+          "id": "stellar-blade-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Stellar Blade.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Stellar_Blade/ar/v1/SB.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "2.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-first-berserker-khazan",
+      "title": "The First Berserker: Khazan",
+      "category": "RPG",
+      "rating": 4.7,
+      "description": "The First Berserker: Khazan is a hardcore action role-playing game. The player will become Khazan, the great general of the Pell Los Empire, who overcame death, and sets out to reveal the incidents that led to his downfall and seek vengeance on his enemies. Steam reviews: 93.2% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/header.jpg?t=1765255716",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2680010/header.jpg?t=1765255716",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-first-berserker-khazan-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The First Berserker: Khazan.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/the_first_Berserker_Khazan/ar/v1/BBQ.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-last-faith",
+      "title": "The Last Faith",
+      "category": "Adventure",
+      "rating": 4.2,
+      "description": "Dive into the latest evolution of The Last Faith: a dark and gothic fusion of metroidvania and soulslike. Engage in merciless and precise combat with a huge range of weapons, firearms, and custom executions. Let nothing stand in the way of your journey to salvation. Steam reviews: 84.6% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1274600/c09375c951984d602703b4e70d948727a00e7232/header.jpg?t=1769525842",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1274600/c09375c951984d602703b4e70d948727a00e7232/header.jpg?t=1769525842",
+      "executable": "TheLastFaith.exe",
+      "translations": [
+        {
+          "id": "the-last-faith-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Last Faith.",
+          "releaseDate": "2026-04-16",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/the_last_faith/ar/v1/thelastfaithv1.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "32.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-last-of-us-part-i",
+      "title": "The Last of Us Part I",
+      "category": "Adventure",
+      "rating": 4.1,
+      "description": "Discover the award-winning game that inspired the critically acclaimed television show. Guide Joel and Ellie through a post-apocalyptic America, and encounter unforgettable allies and enemies in The Last of Us. Steam reviews: 82.3% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/header.jpg?t=1750959031",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-last-of-us-part-i-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Last of Us Part I.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/The_Last_of_Us_Part_I/ar/v1/toolandfilles.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "2.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "untitled-goose-game",
+      "title": "Untitled Goose Game",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "It's a lovely morning in the village and you are a horrible goose. Steam reviews: 96% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/837470/header.jpg?t=1699052664",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/837470/header.jpg?t=1699052664",
+      "executable": "",
+      "translations": [
+        {
+          "id": "untitled-goose-game-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Untitled Goose Game.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Untitled_Goose_Game/ar/v1/UntitledGooseGame_Data.ZIP",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "76.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "wuchang-fallen-feathers",
+      "title": "WUCHANG: Fallen Feathers",
+      "category": "RPG",
+      "rating": 3.6,
+      "description": "WUCHANG: Fallen Feathers is a soulslike, action RPG set in the land of Shu during the dark and tumultuous late Ming Dynasty, plagued with warring factions and a mysterious illness spawning monstrous creatures. Steam reviews: 72.8% positive (Mostly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2277560/7dbbe47ac51463eb1627581f5c048b94ef856d5c/header.jpg?t=1770741955",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2277560/7dbbe47ac51463eb1627581f5c048b94ef856d5c/header.jpg?t=1770741955",
+      "executable": "",
+      "translations": [
+        {
+          "id": "wuchang-fallen-feathers-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for WUCHANG: Fallen Feathers.",
+          "releaseDate": "2026-04-17",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Wuchang_Fallen_Feathers/ar/v1/Wuchang_AR_1.0.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "5.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    }
+  ]
+}

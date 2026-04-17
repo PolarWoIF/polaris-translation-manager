@@ -1,0 +1,99 @@
+{
+  "name": "polar-translation",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron.cjs",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "node -e \"const fs=require('fs');['dist','dist_electron'].forEach((p)=>fs.rmSync(p,{recursive:true,force:true}));\"",
+    "lint": "tsc --noEmit",
+    "validate:content": "node scripts/validate-content.mjs",
+    "electron:dev": "electron .",
+    "electron:build": "npm run build && electron-builder --win nsis portable zip --x64",
+    "build:renderer": "vite build",
+    "build:desktop": "npm run build:renderer && electron-builder --win nsis portable zip --x64",
+    "build:portable": "npm run build:renderer && electron-builder --win portable --x64",
+    "build:zip": "npm run build:renderer && electron-builder --win zip --x64",
+    "build:release": "npm run clean && npm run lint && npm run validate:content && npm run build:desktop",
+    "build:exe": "npm run build:desktop",
+    "version:check": "node -e \"const v=require('./package.json').version; if(!/^\\d+\\.\\d+\\.\\d+$/.test(v)){throw new Error('Version must be semver x.y.z')}}\""
+  },
+  "build": {
+    "appId": "com.polar.translation",
+    "productName": "Polar Translation",
+    "asar": true,
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "electron.cjs",
+      "package.json",
+      "!backups/**/*",
+      "!dist_electron/**/*"
+    ],
+    "extraMetadata": {
+      "main": "electron.cjs"
+    },
+    "artifactName": "Polar-Translation-${version}-${arch}.${ext}",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/assets/red-set/windows/icon-256x256.png",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "Polar-Translation-Setup-${version}.${ext}"
+    },
+    "portable": {
+      "artifactName": "Polar-Translation-Portable-${version}.${ext}"
+    }
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
+    "electron": "^41.2.0",
+    "electron-builder": "^26.8.1",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  },
+  "description": "Polar Translation desktop manager for Arabic game localization patches.",
+  "author": "Polar Translation",
+  "license": "MIT"
+}

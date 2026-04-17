@@ -1,0 +1,7 @@
+{
+  "name": "Polar Translation",
+  "description": "A fully data-driven game translation management app for professional localization patches.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
