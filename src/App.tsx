@@ -10,6 +10,7 @@ import { installerService } from "./services/installerService";
 import { AppData, Game, GameStatus, InstallationState } from "./types";
 import { dataService, ContentLoadResult } from "./services/dataService";
 import { updateService, AppUpdateState } from "./services/updateService";
+import { desktopUpdaterService, DesktopUpdaterState } from "./services/desktopUpdaterService";
 import { APP_VERSION } from "./constants";
 
 const GAMES_PER_PAGE = 15;
@@ -21,6 +22,7 @@ export default function App() {
   const [isRefreshingContent, setIsRefreshingContent] = useState(false);
   const [contentState, setContentState] = useState<ContentLoadResult | null>(null);
   const [appUpdateState, setAppUpdateState] = useState<AppUpdateState | null>(null);
+  const [desktopUpdateState, setDesktopUpdateState] = useState<DesktopUpdaterState | null>(null);
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -65,6 +67,17 @@ export default function App() {
     void loadContent(false);
     void checkAppUpdates();
   }, [checkAppUpdates, loadContent]);
+
+  useEffect(() => {
+    const unsubscribe = desktopUpdaterService.subscribe((state) => {
+      setDesktopUpdateState(state);
+    });
+    void desktopUpdaterService.initialize();
+    return () => {
+      unsubscribe();
+      desktopUpdaterService.dispose();
+    };
+  }, []);
   
   // Manage status for all games
   const [gameStatuses, setGameStatuses] = useState<Record<string, GameStatus>>(() => {
@@ -249,6 +262,10 @@ export default function App() {
     return parsed.toLocaleString();
   };
 
+  const showDesktopUpdateBanner =
+    desktopUpdateState &&
+    ["checking", "available", "downloading", "downloaded", "error"].includes(desktopUpdateState.phase);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#0B0C10] flex flex-col items-center justify-center gap-8">
@@ -300,7 +317,43 @@ export default function App() {
           totalGames={data?.games.length || 0}
         />
 
-        {appUpdateState?.available && (
+        {showDesktopUpdateBanner && desktopUpdateState && (
+          <section className="max-w-7xl mx-auto px-6 pt-6">
+            <div className="w-full border border-[#00D2FF]/30 bg-[#00D2FF]/10 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <p className="text-xs font-bold text-white/90 uppercase tracking-[0.2em]">
+                {desktopUpdateState.phase === "checking" &&
+                  `Checking App Updates (Current v${desktopUpdateState.currentVersion ?? APP_VERSION})...`}
+                {desktopUpdateState.phase === "available" &&
+                  `App Update Found: v${desktopUpdateState.latestVersion ?? "latest"} (downloading...)`}
+                {desktopUpdateState.phase === "downloading" &&
+                  `Downloading Update v${desktopUpdateState.latestVersion ?? "latest"} (${Math.round(
+                    desktopUpdateState.progressPercent
+                  )}%)`}
+                {desktopUpdateState.phase === "downloaded" &&
+                  `Update Ready: v${desktopUpdateState.latestVersion ?? "latest"}. Restart to install.`}
+                {desktopUpdateState.phase === "error" &&
+                  `App Update Check Failed: ${desktopUpdateState.error ?? desktopUpdateState.message}`}
+              </p>
+              {desktopUpdateState.phase === "downloaded" ? (
+                <button
+                  onClick={() => void desktopUpdaterService.restartAndInstall()}
+                  className="inline-flex items-center gap-2 text-xs font-black text-[#00D2FF] hover:text-white uppercase tracking-[0.2em] transition-colors"
+                >
+                  Restart & Install
+                </button>
+              ) : (
+                <button
+                  onClick={() => void desktopUpdaterService.checkNow()}
+                  className="inline-flex items-center gap-2 text-xs font-black text-[#00D2FF] hover:text-white uppercase tracking-[0.2em] transition-colors"
+                >
+                  Check Again
+                </button>
+              )}
+            </div>
+          </section>
+        )}
+
+        {!showDesktopUpdateBanner && appUpdateState?.available && (
           <section className="max-w-7xl mx-auto px-6 pt-6">
             <div className="w-full border border-[#00D2FF]/30 bg-[#00D2FF]/10 rounded-2xl px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <p className="text-xs font-bold text-white/90 uppercase tracking-[0.2em]">
@@ -469,19 +522,6 @@ export default function App() {
                 </motion.div>
               )}
 
-              {contentState && (
-                <div className="px-4 py-3 bg-white/5 border border-white/10 rounded-2xl flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
-                  <span>Content: {contentState.source}</span>
-                  <span>Version: {contentState.contentVersion}</span>
-                  <span>Synced: {formatSyncTime(contentState.syncedAt)}</span>
-                  {contentState.warning && (
-                    <span className="text-amber-300">{contentState.warning}</span>
-                  )}
-                  {contentLoadError && (
-                    <span className="text-red-300">{contentLoadError}</span>
-                  )}
-                </div>
-              )}
             </div>
           </div>
 
@@ -542,6 +582,31 @@ export default function App() {
           {filteredGames.length === 0 && (
             <div className="py-20 text-center">
               <p className="text-white/40 font-bold uppercase tracking-widest">No games found matching your search.</p>
+            </div>
+          )}
+
+          {contentState && (
+            <div className="mt-16 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl flex flex-wrap items-center justify-center md:justify-between gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+              <div className="flex flex-wrap items-center gap-3">
+                <span>Content: {contentState.source}</span>
+                <span>Version: {contentState.contentVersion}</span>
+                <span>Synced: {formatSyncTime(contentState.syncedAt)}</span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                {contentState.warning && <span className="text-amber-300">{contentState.warning}</span>}
+                {contentLoadError && <span className="text-red-300">{contentLoadError}</span>}
+                <button
+                  onClick={() => void loadContent(true)}
+                  disabled={isRefreshingContent}
+                  className={`px-4 py-2 rounded-xl border transition-all ${
+                    isRefreshingContent
+                      ? "bg-[#00D2FF]/20 text-[#00D2FF] border-[#00D2FF]/40"
+                      : "bg-white/5 hover:bg-white/10 border-white/10 text-white"
+                  }`}
+                >
+                  {isRefreshingContent ? "Refreshing..." : "Refresh Content"}
+                </button>
+              </div>
             </div>
           )}
         </section>

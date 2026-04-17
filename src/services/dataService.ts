@@ -30,6 +30,45 @@ interface CachedEnvelope {
 
 const DEFAULT_GAME_IMAGE = "/assets/red-set/windows/icon-256x256.png";
 
+interface NodeRuntime {
+  http: typeof import("node:http");
+  https: typeof import("node:https");
+}
+
+function getNodeRuntime(): NodeRuntime | null {
+  if (typeof window === "undefined") return null;
+  const windowWithRequire = window as typeof window & {
+    require?: (name: string) => unknown;
+  };
+
+  if (typeof windowWithRequire.require !== "function") return null;
+
+  try {
+    return {
+      http: windowWithRequire.require("node:http") as typeof import("node:http"),
+      https: windowWithRequire.require("node:https") as typeof import("node:https"),
+    };
+  } catch {
+    return null;
+  }
+}
+
+function getStorageItem(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function setStorageItem(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Best effort caching only.
+  }
+}
+
 function normalizeString(value: unknown, fallback = ""): string {
   return typeof value === "string" ? value.trim() : fallback;
 }
@@ -250,6 +289,8 @@ async function fetchJsonWithTimeout(url: string): Promise<unknown> {
       signal: abortController.signal,
       headers: {
         Accept: "application/json",
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
       },
     });
 
@@ -261,6 +302,106 @@ async function fetchJsonWithTimeout(url: string): Promise<unknown> {
   } finally {
     clearTimeout(timeout);
   }
+}
+
+function downloadJsonFromNode(url: string, runtime: NodeRuntime): Promise<unknown> {
+  const maxRedirects = 5;
+  const timeoutMs = REMOTE_FETCH_TIMEOUT_MS;
+
+  const requestFrom = (targetUrl: string, redirectCount: number): Promise<unknown> =>
+    new Promise((resolve, reject) => {
+      let parsedUrl: URL;
+      try {
+        parsedUrl = new URL(targetUrl);
+      } catch {
+        reject(new Error("Invalid remote content URL."));
+        return;
+      }
+
+      const transport =
+        parsedUrl.protocol === "https:"
+          ? runtime.https
+          : parsedUrl.protocol === "http:"
+            ? runtime.http
+            : null;
+
+      if (!transport) {
+        reject(new Error(`Unsupported remote protocol: ${parsedUrl.protocol}`));
+        return;
+      }
+
+      const request = transport.get(
+        parsedUrl,
+        {
+          headers: {
+            Accept: "application/json",
+            "Cache-Control": "no-cache",
+            Pragma: "no-cache",
+          },
+        },
+        (response) => {
+          const statusCode = response.statusCode ?? 0;
+          if (statusCode >= 300 && statusCode < 400 && response.headers.location) {
+            if (redirectCount >= maxRedirects) {
+              reject(new Error("Too many redirects while loading Cloudflare content."));
+              return;
+            }
+
+            response.resume();
+            const redirectUrl = new URL(response.headers.location, parsedUrl).toString();
+            requestFrom(redirectUrl, redirectCount + 1).then(resolve).catch(reject);
+            return;
+          }
+
+          if (statusCode < 200 || statusCode >= 300) {
+            response.resume();
+            reject(new Error(`Cloudflare content request failed (HTTP ${statusCode}).`));
+            return;
+          }
+
+          const chunks: Uint8Array[] = [];
+          response.on("data", (chunk: Uint8Array) => chunks.push(chunk));
+          response.on("error", reject);
+          response.on("end", () => {
+            try {
+              const body = Buffer.concat(chunks).toString("utf8");
+              resolve(JSON.parse(body));
+            } catch (error) {
+              const message = error instanceof Error ? error.message : String(error);
+              reject(new Error(`Cloudflare content is not valid JSON: ${message}`));
+            }
+          });
+        }
+      );
+
+      const timeout = setTimeout(() => {
+        request.destroy(new Error(`Cloudflare content request timed out after ${timeoutMs}ms.`));
+      }, timeoutMs);
+
+      request.on("error", (error) => {
+        clearTimeout(timeout);
+        reject(error);
+      });
+
+      request.on("close", () => {
+        clearTimeout(timeout);
+      });
+    });
+
+  return requestFrom(url, 0);
+}
+
+async function fetchRemoteJson(url: string): Promise<unknown> {
+  const cacheBustedUrl = new URL(url);
+  cacheBustedUrl.searchParams.set("_ts", Date.now().toString());
+  const targetUrl = cacheBustedUrl.toString();
+
+  const runtime = getNodeRuntime();
+  if (runtime) {
+    return downloadJsonFromNode(targetUrl, runtime);
+  }
+
+  return fetchJsonWithTimeout(targetUrl);
 }
 
 export const dataService = {
@@ -309,16 +450,16 @@ export const dataService = {
       contentVersion,
       data,
     };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+    setStorageItem(CACHE_KEY, JSON.stringify(payload));
   },
 
   getCached(): CachedEnvelope | null {
-    return parseCachedEnvelope(localStorage.getItem(CACHE_KEY));
+    return parseCachedEnvelope(getStorageItem(CACHE_KEY));
   },
 
   async tryFetchRemote(forceRemote: boolean): Promise<{ data: AppData; contentVersion: string } | null> {
     try {
-    const remoteRaw = await fetchJsonWithTimeout(REMOTE_JSON_URL);
+      const remoteRaw = await fetchRemoteJson(REMOTE_JSON_URL);
     const remoteData = normalizeAppData(remoteRaw);
     assertAppDataUsable(remoteData, "Cloudflare content");
     const contentVersion = remoteData.contentVersion || remoteData.lastUpdated;

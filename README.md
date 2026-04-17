@@ -7,6 +7,7 @@ Production-ready Electron desktop app for managing Arabic game translation patch
 - `React + Vite + TypeScript` renderer
 - `JSZip` patch extraction
 - `Cloudflare R2` remote content source
+- `electron-updater` for app self-updates from GitHub Releases
 
 ## Quick Start
 1. Install dependencies:
@@ -28,7 +29,7 @@ npm run electron:dev
 ```bash
 npm run build
 ```
-- Build Windows installer + portable:
+- Build Windows installer + portable + zip:
 ```bash
 npm run build:desktop
 ```
@@ -46,7 +47,15 @@ Behavior:
 - Try remote Cloudflare JSON first
 - If unavailable/invalid, use cached content
 - If cache missing, use bundled `public/data.json`
+- Startup refresh checks remote content every launch
 - Manual refresh button re-checks Cloudflare on demand
+
+## App Self-Update
+Packaged Windows builds check GitHub Releases on startup:
+- checks for newer app version
+- downloads update automatically when available
+- installs on restart (`Restart & Install` in-app)
+- preserves user data under app data folder
 
 ### Remote JSON Contract (minimum)
 ```json
@@ -109,8 +118,10 @@ git push && git push --tags
 3. GitHub Actions workflow `release.yml` builds Windows artifacts and attaches them to the release.
 
 ## Commands
+- `npm run icons:generate` - Regenerate Windows `.ico` files from PNG sizes
 - `npm run lint` - TypeScript type check
 - `npm run validate:content` - Validate bundled `public/data.json`
+- `npm run verify:existing-user-update` - Simulate installed-user Cloudflare content update flow
 - `npm run build` - Production renderer build
 - `npm run build:desktop` - Build installer + portable EXE
 - `npm run build:release` - Clean + lint + package
