@@ -22,6 +22,10 @@ if (process.env.ELECTRON_RUN_AS_NODE && process.env.POLAR_RELAUNCH_CLEAN_ENV !==
 }
 
 const { app, BrowserWindow, ipcMain } = require("electron");
+app.setName("Polar Translation");
+if (process.platform === "win32") {
+  process.title = "Polar Translation";
+}
 
 const DEV_URL_CANDIDATES = [process.env.ELECTRON_DEV_URL, "http://localhost:3000", "http://localhost:3001"].filter(
   Boolean

@@ -1,5 +1,6 @@
 {
   "name": "polar-translation",
+  "productName": "Polar Translation",
   "private": false,
   "version": "1.0.1",
   "type": "module",
@@ -42,6 +43,7 @@
     },
     "artifactName": "Polar-Translation-${version}-${arch}.${ext}",
     "win": {
+      "executableName": "Polar Translation",
       "target": [
         {
           "target": "nsis",
@@ -63,12 +65,12 @@
         }
       ],
       "icon": "public/assets/red-set/windows/icon.ico",
-      "signAndEditExecutable": false
+      "signAndEditExecutable": true
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": "always",
+      "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Polar Translation",
       "installerIcon": "public/assets/red-set/windows/icon.ico",

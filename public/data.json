@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-17T17:11:43Z",
+  "lastUpdated": "2026-04-17T23:10:37.563Z",
   "categories": [
     "Action",
     "Adventure",
@@ -647,6 +647,34 @@
             "Adjusted text rendering and spacing"
           ],
           "size": "5.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "haunted-room-205",
+      "title": "Haunted Room : 205",
+      "category": "Simulation",
+      "rating": 4.7,
+      "description": "To save money, you rent an unusually cheap apartment, believing you can coexist with the supernatural. But the disturbances inside Room 205 quickly become more dangerous than expected. Steam reviews: 94.7% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3694590/98b3d9fb567ecc21546594462650cc4840589157/header.jpg?t=1756979751",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3694590/98b3d9fb567ecc21546594462650cc4840589157/header.jpg?t=1756979751",
+      "executable": "",
+      "translations": [
+        {
+          "id": "haunted-room-205-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Haunted Room : 205.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Haunted_Room_205/ar/v1/projectCZW.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.9 MB",
           "author": "Polaris Team"
         }
       ]
