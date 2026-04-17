@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-04-18
+
+### Added
+- Added new Cloudflare-driven game card and translation package for `Haunted Room : 205`.
+
+### Changed
+- Updated Windows executable metadata to `Polar Translation` (process/app identity branding).
+- Updated NSIS installer desktop shortcut behavior to explicitly offer shortcut creation during setup.
+- Refreshed production build artifacts to include latest branding and content updates.
+
 ## [1.0.0] - 2026-04-17
 
 ### Added
