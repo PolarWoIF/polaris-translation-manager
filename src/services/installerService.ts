@@ -9,6 +9,7 @@ interface NodeRuntime {
   https: typeof import("node:https");
   os: typeof import("node:os");
   childProcess: typeof import("node:child_process");
+  sevenZipBinaryPath: string;
 }
 
 function getNodeRuntime(): NodeRuntime | null {
@@ -22,6 +23,15 @@ function getNodeRuntime(): NodeRuntime | null {
   }
 
   try {
+    const sevenZipModule = windowWithRequire.require("7zip-bin") as {
+      path7za?: string;
+      path7x?: string;
+    };
+    const sevenZipBinaryPath = sevenZipModule.path7za || sevenZipModule.path7x;
+    if (!sevenZipBinaryPath) {
+      return null;
+    }
+
     return {
       fs: windowWithRequire.require("node:fs/promises") as typeof import("node:fs/promises"),
       path: windowWithRequire.require("node:path") as typeof import("node:path"),
@@ -29,6 +39,7 @@ function getNodeRuntime(): NodeRuntime | null {
       https: windowWithRequire.require("node:https") as typeof import("node:https"),
       os: windowWithRequire.require("node:os") as typeof import("node:os"),
       childProcess: windowWithRequire.require("node:child_process") as typeof import("node:child_process"),
+      sevenZipBinaryPath,
     };
   } catch {
     return null;
@@ -110,6 +121,16 @@ function downloadArchive(url: string, runtime: NodeRuntime): Promise<Uint8Array>
     });
 
   return getFromUrl(url, 0);
+}
+
+function getArchiveExtensionFromUrl(downloadUrl: string): string {
+  try {
+    const parsed = new URL(downloadUrl);
+    const pathname = decodeURIComponent(parsed.pathname);
+    return pathname.toLowerCase().match(/(\.[a-z0-9]+)$/i)?.[1] ?? "";
+  } catch {
+    return "";
+  }
 }
 
 function isPathInsideTarget(targetRoot: string, destinationPath: string, runtime: NodeRuntime): boolean {
@@ -287,6 +308,103 @@ async function runExecutable(
       resolve({ code, stdout, stderr, timedOut });
     });
   });
+}
+
+interface ArchiveExtractionResult {
+  extractionRoot: string;
+  extractedFiles: string[];
+}
+
+async function extractArchiveToTempDirectory(
+  archiveBuffer: Uint8Array,
+  archiveUrl: string,
+  runtime: NodeRuntime,
+  onProgress: (state: InstallationState) => void,
+  progressStart: number,
+  progressEnd: number,
+  progressLabel: string
+): Promise<ArchiveExtractionResult> {
+  const extension = getArchiveExtensionFromUrl(archiveUrl);
+  const extractionRoot = await runtime.fs.mkdtemp(
+    runtime.path.join(runtime.os.tmpdir(), "polaris-archive-")
+  );
+
+  try {
+    if (extension === ".zip") {
+      const zip = await JSZip.loadAsync(archiveBuffer);
+      const archiveFiles = Object.values(zip.files).filter((entry) => !entry.dir);
+      if (archiveFiles.length === 0) {
+        throw new Error("Patch archive has no installable files.");
+      }
+
+      for (let index = 0; index < archiveFiles.length; index += 1) {
+        const archiveFile = archiveFiles[index];
+        const relativePath = sanitizeZipPath(archiveFile.name);
+        const destinationPath = runtime.path.resolve(extractionRoot, relativePath);
+
+        if (!isPathInsideTarget(extractionRoot, destinationPath, runtime)) {
+          throw new Error(`Blocked unsafe path in archive: ${archiveFile.name}`);
+        }
+
+        await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
+        const fileData = await archiveFile.async("uint8array");
+        await runtime.fs.writeFile(destinationPath, fileData);
+
+        const progress =
+          progressStart + Math.round(((index + 1) / archiveFiles.length) * (progressEnd - progressStart));
+        onProgress({
+          step: "extracting",
+          progress: Math.min(progress, progressEnd),
+          message: `${progressLabel} ${index + 1}/${archiveFiles.length}...`,
+        });
+      }
+    } else {
+      const archivePath = runtime.path.join(extractionRoot, `archive${extension || ".bin"}`);
+      await runtime.fs.writeFile(archivePath, archiveBuffer);
+
+      onProgress({
+        step: "extracting",
+        progress: progressStart,
+        message: `${progressLabel} (7z engine)...`,
+      });
+
+      const result = await runExecutable(
+        runtime.sevenZipBinaryPath,
+        ["x", archivePath, `-o${extractionRoot}`, "-y", "-bb1"],
+        extractionRoot,
+        15 * 60 * 1000,
+        runtime
+      );
+
+      await runtime.fs.rm(archivePath, { force: true });
+
+      if (result.timedOut) {
+        throw new Error("Archive extraction timed out.");
+      }
+
+      if (result.code !== 0) {
+        const details = `${result.stdout}\n${result.stderr}`
+          .split(/\r?\n/)
+          .map((line) => line.trim())
+          .find((line) => line.length > 0);
+        throw new Error(`Archive extraction failed${details ? `: ${details}` : "."}`);
+      }
+    }
+
+    const extractedFiles = await listFilesRecursively(extractionRoot, runtime);
+    if (extractedFiles.length === 0) {
+      throw new Error("Archive extraction produced no files.");
+    }
+
+    return { extractionRoot, extractedFiles };
+  } catch (error) {
+    try {
+      await runtime.fs.rm(extractionRoot, { recursive: true, force: true });
+    } catch {
+      // Best-effort cleanup for failed extraction.
+    }
+    throw error;
+  }
 }
 
 function getTlouToolAutomationScript(): string {
@@ -876,41 +994,16 @@ async function installTheLastOfUsPartI(
     });
     const zipBuffer = await downloadArchive(translation.downloadUrl, runtime);
 
-    onProgress({
-      step: "extracting",
-      progress: 30,
-      message: "Extracting toolandfilles package...",
-    });
-    const zip = await JSZip.loadAsync(zipBuffer);
-    const archiveFiles = Object.values(zip.files).filter((entry) => !entry.dir);
-    if (archiveFiles.length === 0) {
-      throw new Error("toolandfilles package has no files.");
-    }
-
-    temporaryExtractionRoot = await runtime.fs.mkdtemp(
-      runtime.path.join(runtime.os.tmpdir(), "polaris-tlou-")
+    const extractionResult = await extractArchiveToTempDirectory(
+      zipBuffer,
+      translation.downloadUrl,
+      runtime,
+      onProgress,
+      30,
+      52,
+      "Extracting tool package"
     );
-
-    for (let index = 0; index < archiveFiles.length; index += 1) {
-      const archiveFile = archiveFiles[index];
-      const relativePath = sanitizeZipPath(archiveFile.name);
-      const destinationPath = runtime.path.resolve(temporaryExtractionRoot, relativePath);
-
-      if (!isPathInsideTarget(temporaryExtractionRoot, destinationPath, runtime)) {
-        throw new Error(`Blocked unsafe path in tool package: ${archiveFile.name}`);
-      }
-
-      await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
-      const fileData = await archiveFile.async("uint8array");
-      await runtime.fs.writeFile(destinationPath, fileData);
-
-      const progress = 30 + Math.round(((index + 1) / archiveFiles.length) * 22);
-      onProgress({
-        step: "extracting",
-        progress: Math.min(progress, 52),
-        message: `Extracting tools ${index + 1}/${archiveFiles.length}...`,
-      });
-    }
+    temporaryExtractionRoot = extractionResult.extractionRoot;
 
     const toolPath = await findPathByNameRecursively(
       temporaryExtractionRoot,
@@ -1067,39 +1160,50 @@ export const installerService = {
 
       // 2. Download patch archive.
       onProgress({ step: "downloading", progress: 10, message: "Downloading translation patch..." });
-      const zipBuffer = await downloadArchive(translation.downloadUrl, runtime);
-      onProgress({ step: "extracting", progress: 40, message: "Reading patch archive..." });
-      const zip = await JSZip.loadAsync(zipBuffer);
-
-      const files = Object.values(zip.files).filter((entry) => !entry.dir);
-      if (files.length === 0) {
-        throw new Error("Patch archive has no installable files.");
-      }
+      const archiveBuffer = await downloadArchive(translation.downloadUrl, runtime);
+      const extractionResult = await extractArchiveToTempDirectory(
+        archiveBuffer,
+        translation.downloadUrl,
+        runtime,
+        onProgress,
+        40,
+        58,
+        "Extracting patch files"
+      );
+      const temporaryExtractionRoot = extractionResult.extractionRoot;
+      const files = extractionResult.extractedFiles;
 
       const installedFiles: string[] = [];
 
-      // 3. Copy patched files to game folder (overwrite in place) using exact ZIP paths.
-      for (let index = 0; index < files.length; index += 1) {
-        const file = files[index];
-        const relativePath = sanitizeZipPath(file.name);
-        const destinationPath = runtime.path.resolve(targetRoot, relativePath);
+      try {
+        // 3. Copy patched files to game folder (overwrite in place) preserving archive relative paths.
+        for (let index = 0; index < files.length; index += 1) {
+          const sourcePath = files[index];
+          const archiveRelativePath = runtime.path.relative(temporaryExtractionRoot, sourcePath);
+          const relativePath = sanitizeZipPath(archiveRelativePath);
+          const destinationPath = runtime.path.resolve(targetRoot, relativePath);
 
-        if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
-          throw new Error(`Blocked unsafe file path in archive: ${file.name}`);
+          if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
+            throw new Error(`Blocked unsafe file path in archive: ${archiveRelativePath}`);
+          }
+
+          await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
+          await runtime.fs.copyFile(sourcePath, destinationPath);
+          installedFiles.push(relativePath);
+
+          const progress = 60 + Math.round(((index + 1) / files.length) * 39);
+          onProgress({
+            step: "copying",
+            progress: Math.min(progress, 99),
+            message: `Applying files ${index + 1}/${files.length}...`,
+          });
         }
-
-        await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
-
-        const fileData = await file.async("uint8array");
-        await runtime.fs.writeFile(destinationPath, fileData);
-        installedFiles.push(relativePath);
-
-        const progress = 60 + Math.round(((index + 1) / files.length) * 39);
-        onProgress({
-          step: "copying",
-          progress: Math.min(progress, 99),
-          message: `Applying files ${index + 1}/${files.length}...`,
-        });
+      } finally {
+        try {
+          await runtime.fs.rm(temporaryExtractionRoot, { recursive: true, force: true });
+        } catch {
+          // Best-effort cleanup for temporary extraction files.
+        }
       }
 
       onProgress({

@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-04-18
+
+### Added
+- Added Cloudflare content cards for `Firewatch` and `Mouthwashing`.
+- Updated Sekiro translation source to the newly uploaded archive.
+
+### Changed
+- Installer now supports extracting archives via 7z engine for non-zip formats (`.rar`, `.7z`, and other 7z-supported formats).
+- Normal game install flow now handles mixed archive formats without requiring ZIP-only uploads.
+
 ## [1.0.2] - 2026-04-18
 
 ### Added

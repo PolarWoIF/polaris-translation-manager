@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-18T02:58:11.505Z",
+  "lastUpdated": "2026-04-18T03:05:33.874Z",
   "categories": [
     "Action",
     "Adventure",
@@ -818,7 +818,63 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "firewatch",
+      "title": "Firewatch",
+      "category": "Adventure",
+      "rating": 4.5,
+      "description": "Firewatch is a single-player first-person mystery set in the Wyoming wilderness, where your only emotional lifeline is the person on the other end of a handheld radio. Steam reviews: 90.5% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383870/41a7d0ff4c2dab4ed69c53c9a29c931e6f62948d/header.jpg?t=1755789801",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/383870/41a7d0ff4c2dab4ed69c53c9a29c931e6f62948d/header.jpg?t=1755789801",
+      "executable": "",
+      "translations": [
+        {
+          "id": "firewatch-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Firewatch.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Firewatch/ar/v1/Firewatch_Data.7z",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "223.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "mouthwashing",
+      "title": "Mouthwashing",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "The five crew members of the Tulpar are stranded in the empty reaches of space, shrouded in perpetual sunset. God is not watching. Steam reviews: 95.4% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2475490/header.jpg?t=1771578656",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2475490/header.jpg?t=1771578656",
+      "executable": "",
+      "translations": [
+        {
+          "id": "mouthwashing-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Mouthwashing.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Mouthwashing/ar/v1/Mouthwashing1.2.rar",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "133.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-18T02:58:11.505Z"
+  "contentVersion": "2026-04-18T03:05:33.874Z"
 }
