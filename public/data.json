@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-18T03:17:11.200Z",
+  "lastUpdated": "2026-04-18T19:17:30.049Z",
   "categories": [
     "Action",
     "Adventure",
@@ -860,21 +860,49 @@
         {
           "id": "mouthwashing-ar-v1",
           "name": "Arabic Translation Pack",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "type": "community",
           "description": "Arabic localization package for Mouthwashing.",
           "releaseDate": "2026-04-18",
-          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Mouthwashing/ar/v1/Mouthwashing1.2.rar",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Mouthwashing/ar/v1/Mouthwashing1.2.zip",
+          "changelog": [
+            "Re-uploaded package as ZIP format",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "177.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "mouse-p-i-for-hire",
+      "title": "MOUSE: P.I. For Hire",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "Join private investigator Jack Pepper on a guns blazing, jazz-fueled adventure in MOUSE: P.I. For Hire. MOUSE combines the charm of hand-drawn rubber hose animation inspired by the classic cartoons of the 1930’s with the adrenaline and action of an explosive first person shooter. Steam reviews: 95.6% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2416450/298ff2fc3f6a700d022b8d3ec58047f2b426be03/header.jpg?t=1776466362",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2416450/298ff2fc3f6a700d022b8d3ec58047f2b426be03/header.jpg?t=1776466362",
+      "executable": "",
+      "translations": [
+        {
+          "id": "mouse-p-i-for-hire-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for MOUSE: P.I. For Hire.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/MOUSE_P_I_For_Hire/ar/v1/MOUSE_Data.zip",
           "changelog": [
             "Initial Arabic release",
             "Localized UI and dialogues",
             "Adjusted text rendering and spacing"
           ],
-          "size": "133.9 MB",
+          "size": "1.4 MB",
           "author": "Polaris Team"
         }
       ]
     }
   ],
-  "contentVersion": "2026-04-18T03:17:11.200Z"
+  "contentVersion": "2026-04-18T19:17:30.049Z"
 }
