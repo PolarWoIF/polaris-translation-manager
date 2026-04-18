@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-18T02:38:01.167Z",
+  "lastUpdated": "2026-04-18T02:58:11.505Z",
   "categories": [
     "Action",
     "Adventure",
@@ -748,17 +748,17 @@
         {
           "id": "sekiro-shadows-die-twice-goty-edition-ar-v1",
           "name": "Arabic Translation Pack",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "type": "community",
           "description": "Arabic localization package for Sekiro™: Shadows Die Twice - GOTY Edition.",
           "releaseDate": "2026-04-18",
-          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Sekiro_Shadows_Die_Twice/ar/v1/Sekiro.zip",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Sekiro_Shadows_Die_Twice/ar/v1/games_Sekiro_Shadows_Die_Twice_ar_v1_Sekiro.rar",
           "changelog": [
-            "Initial Arabic release",
+            "Re-uploaded package from Cloudflare update",
             "Localized UI and dialogues",
             "Adjusted text rendering and spacing"
           ],
-          "size": "51.4 MB",
+          "size": "50.6 MB",
           "author": "Polaris Team"
         }
       ]
@@ -820,5 +820,5 @@
       ]
     }
   ],
-  "contentVersion": "2026-04-18T02:38:01.167Z"
+  "contentVersion": "2026-04-18T02:58:11.505Z"
 }
