@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-04-18
+
+### Fixed
+- Updated Sekiro translation entry to the newly uploaded ZIP package.
+- Hardened non-ZIP extraction flow with multiple 7z binary fallbacks to avoid installer failures on `.rar` / `.7z` archives.
+- Improved archive extraction error reporting so failures no longer appear as ZIP-only parser errors for non-ZIP packages.
+
 ## [1.0.3] - 2026-04-18
 
 ### Added

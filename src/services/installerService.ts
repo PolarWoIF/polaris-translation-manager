@@ -4,12 +4,13 @@ import { InstallationState, Game, Translation } from "../types";
 
 interface NodeRuntime {
   fs: typeof import("node:fs/promises");
+  fsSync: typeof import("node:fs");
   path: typeof import("node:path");
   http: typeof import("node:http");
   https: typeof import("node:https");
   os: typeof import("node:os");
   childProcess: typeof import("node:child_process");
-  sevenZipBinaryPath: string;
+  sevenZipBinaryPath: string | null;
 }
 
 function getNodeRuntime(): NodeRuntime | null {
@@ -23,17 +24,20 @@ function getNodeRuntime(): NodeRuntime | null {
   }
 
   try {
-    const sevenZipModule = windowWithRequire.require("7zip-bin") as {
-      path7za?: string;
-      path7x?: string;
-    };
-    const sevenZipBinaryPath = sevenZipModule.path7za || sevenZipModule.path7x;
-    if (!sevenZipBinaryPath) {
-      return null;
+    let sevenZipBinaryPath: string | null = null;
+    try {
+      const sevenZipModule = windowWithRequire.require("7zip-bin") as {
+        path7za?: string;
+        path7x?: string;
+      };
+      sevenZipBinaryPath = sevenZipModule.path7za || sevenZipModule.path7x || null;
+    } catch {
+      // Keep optional 7z runtime null and fallback to system candidates later.
     }
 
     return {
       fs: windowWithRequire.require("node:fs/promises") as typeof import("node:fs/promises"),
+      fsSync: windowWithRequire.require("node:fs") as typeof import("node:fs"),
       path: windowWithRequire.require("node:path") as typeof import("node:path"),
       http: windowWithRequire.require("node:http") as typeof import("node:http"),
       https: windowWithRequire.require("node:https") as typeof import("node:https"),
@@ -131,6 +135,44 @@ function getArchiveExtensionFromUrl(downloadUrl: string): string {
   } catch {
     return "";
   }
+}
+
+function getSevenZipCandidates(runtime: NodeRuntime): string[] {
+  const candidates: string[] = [];
+  const pushCandidate = (value: string | null | undefined) => {
+    if (typeof value !== "string") return;
+    const trimmed = value.trim();
+    if (!trimmed || candidates.includes(trimmed)) return;
+    candidates.push(trimmed);
+  };
+
+  const bundledPath = runtime.sevenZipBinaryPath;
+  if (bundledPath) {
+    pushCandidate(bundledPath);
+    pushCandidate(bundledPath.replace(/\.asar([\\/])/gi, ".asar.unpacked$1"));
+  }
+
+  // Fallback to typical system installations.
+  const programFiles = process.env.ProgramFiles;
+  const programFilesX86 = process.env["ProgramFiles(x86)"];
+  if (programFiles) {
+    pushCandidate(runtime.path.join(programFiles, "7-Zip", "7z.exe"));
+  }
+  if (programFilesX86) {
+    pushCandidate(runtime.path.join(programFilesX86, "7-Zip", "7z.exe"));
+  }
+
+  // Fallback to PATH-resolved commands.
+  pushCandidate("7z.exe");
+  pushCandidate("7z");
+  pushCandidate("7za.exe");
+  pushCandidate("7za");
+
+  return candidates;
+}
+
+function isLikelyFilePath(value: string, runtime: NodeRuntime): boolean {
+  return value.includes(runtime.path.sep) || value.includes("/") || value.includes("\\");
 }
 
 function isPathInsideTarget(targetRoot: string, destinationPath: string, runtime: NodeRuntime): boolean {
@@ -368,26 +410,50 @@ async function extractArchiveToTempDirectory(
         message: `${progressLabel} (7z engine)...`,
       });
 
-      const result = await runExecutable(
-        runtime.sevenZipBinaryPath,
-        ["x", archivePath, `-o${extractionRoot}`, "-y", "-bb1"],
-        extractionRoot,
-        15 * 60 * 1000,
-        runtime
-      );
+      const extractionArgs = ["x", archivePath, `-o${extractionRoot}`, "-y", "-bb1"];
+      const candidates = getSevenZipCandidates(runtime);
+      const candidateErrors: string[] = [];
+      let result: { code: number | null; stdout: string; stderr: string; timedOut: boolean } | null = null;
+      let succeeded = false;
 
-      await runtime.fs.rm(archivePath, { force: true });
+      for (const candidate of candidates) {
+        if (isLikelyFilePath(candidate, runtime) && !runtime.fsSync.existsSync(candidate)) {
+          continue;
+        }
 
-      if (result.timedOut) {
-        throw new Error("Archive extraction timed out.");
-      }
+        try {
+          result = await runExecutable(candidate, extractionArgs, extractionRoot, 15 * 60 * 1000, runtime);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          candidateErrors.push(`${candidate}: ${message}`);
+          continue;
+        }
 
-      if (result.code !== 0) {
+        if (result.timedOut) {
+          throw new Error(`Archive extraction timed out while running ${candidate}.`);
+        }
+
+        if (result.code === 0) {
+          succeeded = true;
+          break;
+        }
+
         const details = `${result.stdout}\n${result.stderr}`
           .split(/\r?\n/)
           .map((line) => line.trim())
           .find((line) => line.length > 0);
-        throw new Error(`Archive extraction failed${details ? `: ${details}` : "."}`);
+        candidateErrors.push(
+          `${candidate}: exit ${result.code ?? "null"}${details ? ` (${details})` : ""}`
+        );
+      }
+
+      await runtime.fs.rm(archivePath, { force: true });
+
+      if (!succeeded) {
+        const summary = candidateErrors.length > 0 ? ` Tried: ${candidateErrors.join(" | ")}` : "";
+        throw new Error(
+          `Archive extraction failed for ${extension || "unknown"} format.${summary}`
+        );
       }
     }
 
