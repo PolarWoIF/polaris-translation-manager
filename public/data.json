@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-17T23:10:37.563Z",
+  "lastUpdated": "2026-04-18T02:38:01.167Z",
   "categories": [
     "Action",
     "Adventure",
@@ -678,6 +678,147 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "batman-arkham-knight",
+      "title": "Batman: Arkham Knight",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "Batman™: Arkham Knight brings the award-winning Arkham trilogy from Rocksteady Studios to its epic conclusion. Developed exclusively for New-Gen platforms, Batman: Arkham Knight introduces Rocksteady's uniquely designed version of the Batmobile. Steam reviews: 89.4% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/208650/header.jpg?t=1745534372",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/208650/header.jpg?t=1745534372",
+      "executable": "",
+      "translations": [
+        {
+          "id": "batman-arkham-knight-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Batman™: Arkham Knight.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Batman_Arkham_Knight/ar/Batman_AA_ARABIzation_v3.5_Final_Full.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "195.6 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "dispatch",
+      "title": "Dispatch",
+      "category": "Action",
+      "rating": 4.9,
+      "description": "Dispatch is a superhero workplace comedy where choices matter. Manage a dysfunctional team of misfit heroes and strategize who to send to emergencies around the city, all while balancing office politics, personal relationships, and your own quest to become a hero. All episodes out now! Steam reviews: 97.7% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2592160/header.jpg?t=1775166432",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2592160/header.jpg?t=1775166432",
+      "executable": "",
+      "translations": [
+        {
+          "id": "dispatch-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Dispatch.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Dispatch/ar/v1/Content.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "12.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "sekiro-shadows-die-twice-goty-edition",
+      "title": "Sekiro: Shadows Die Twice - GOTY Edition",
+      "category": "Action",
+      "rating": 4.8,
+      "description": "Game of the Year - The Game Awards 2019 Best Action Game of 2019 - IGN Carve your own clever path to vengeance in the award winning adventure from developer FromSoftware, creators of Bloodborne and the Dark Souls series. Take Revenge. Restore Your Honor. Kill Ingeniously. Steam reviews: 95.3% positive (Overwhelmingly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg?t=1762888662",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/814380/header.jpg?t=1762888662",
+      "executable": "",
+      "translations": [
+        {
+          "id": "sekiro-shadows-die-twice-goty-edition-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Sekiro™: Shadows Die Twice - GOTY Edition.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Sekiro_Shadows_Die_Twice/ar/v1/Sekiro.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "51.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "subliminal",
+      "title": "Subliminal",
+      "category": "RPG",
+      "rating": 3.6,
+      "description": "Subliminal is a psychological horror game inspired by the urban legend of The Backrooms. Bleeding edge lighting and rendering, handcrafted open-ended levels, light and perspective-based puzzles, nostalgic spaces, unfamiliar faces, and a rotting feeling that something is not quite right. Steam reviews: 71.0% positive (Mostly Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2300840/4f7d3661f0520364fb585daf134db08b5311385d/header.jpg?t=1774940575",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2300840/4f7d3661f0520364fb585daf134db08b5311385d/header.jpg?t=1774940575",
+      "executable": "",
+      "translations": [
+        {
+          "id": "subliminal-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Subliminal.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Subliminal/ar/v1/Subliminal.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-evil-within-2",
+      "title": "The Evil Within 2",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "Detective Sebastian Castellanos has lost everything, including his daughter, Lily. To save her, he must descend into the nightmarish world of STEM. Horrifying threats emerge from every corner, and he must rely on his wits to survive. For his one chance at redemption, the only way out is in. Steam reviews: 92.1% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601430/header.jpg?t=1750783701",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/601430/header.jpg?t=1750783701",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-evil-within-2-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Evil Within 2.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/The_Evil_Within_2/ar/v1/The%20Evil%20Within%202.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "4.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
-  ]
+  ],
+  "contentVersion": "2026-04-18T02:38:01.167Z"
 }
