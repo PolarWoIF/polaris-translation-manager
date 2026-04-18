@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-18T19:17:30.049Z",
+  "lastUpdated": "2026-04-18T22:08:29.999Z",
   "categories": [
     "Action",
     "Adventure",
@@ -902,7 +902,119 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "bioshock-infinite",
+      "title": "BioShock Infinite",
+      "category": "Action",
+      "rating": 4.7,
+      "description": "Indebted to the wrong people, with his life on the line, veteran of the U.S. Cavalry and now hired gun, Booker DeWitt has only one opportunity to wipe his slate clean. He must rescue Elizabeth, a mysterious girl imprisoned since childhood and locked up in the flying city of Columbia. Steam reviews: 93.5% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg?t=1728673518",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/8870/header.jpg?t=1728673518",
+      "executable": "",
+      "translations": [
+        {
+          "id": "bioshock-infinite-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for BioShock Infinite.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/BioShock_Infinite/ar/v1/XGame.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "0.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "hollow-knight-silksong",
+      "title": "Hollow Knight: Silksong",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "Discover a vast, haunted kingdom in Hollow Knight: Silksong! Explore, fight and survive as you ascend to the peak of a land ruled by silk and song. Steam reviews: 89.2% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1030300/7983574d464e6559ac7e24275727f73a8bcca1f3/header.jpg?t=1776125736",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1030300/7983574d464e6559ac7e24275727f73a8bcca1f3/header.jpg?t=1776125736",
+      "executable": "",
+      "translations": [
+        {
+          "id": "hollow-knight-silksong-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Hollow Knight: Silksong.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Hollow_Knight_Silksong/ar/v1/Hollow%20Knight%20Silksong_Data.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "16.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-last-of-us-part-ii-remastered",
+      "title": "The Last of Us Part II Remastered",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "Experience the winner of over 300 Game of the Year awards, now on PC. Discover Ellie and Abby’s story with graphical enhancements, gameplay modes like the roguelike survival experience No Return, and more. Steam reviews: 91.0% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2531310/header.jpg?t=1750959180",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-last-of-us-part-ii-remastered-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Last of Us Part II Remastered.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/The_Last_of_Us_Part_II/ar/v1/The%20Last%20of%20Us%20II-2.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "63.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "fallout-4",
+      "title": "Fallout 4",
+      "category": "RPG",
+      "rating": 4.1,
+      "description": "From Bethesda Game Studios, the award-winning creators of Starfield and The Elder Scrolls V: Skyrim, comes Fallout 4. A landmark in open-world RPG design and winner of over 200 ‘Best Of’ honors, including the DICE and BAFTA Game of the Year. Steam reviews: 81.2% positive (Very Positive).",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg?t=1764687456",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/377160/header.jpg?t=1764687456",
+      "executable": "",
+      "translations": [
+        {
+          "id": "fallout-4-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Fallout 4.",
+          "releaseDate": "2026-04-18",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/fallout_4/ar/v1/strings.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.7 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-18T19:17:30.049Z"
+  "contentVersion": "2026-04-18T22:08:29.999Z"
 }
