@@ -47,6 +47,7 @@ let updaterState = {
 
 function resolveWindowIconPath() {
   const candidates = [
+    path.join(process.resourcesPath || "", "icon.ico"),
     path.join(__dirname, "dist/assets/red-set/windows/icon.ico"),
     path.join(__dirname, "dist/assets/red-set/windows/icon-256x256.png"),
     path.join(__dirname, "dist/assets/red-set/windows/icon-64x64.png"),
@@ -235,6 +236,7 @@ async function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 800,
+    title: "Polar Translation",
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,

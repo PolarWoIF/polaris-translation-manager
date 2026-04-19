@@ -6,7 +6,9 @@ export interface Translation {
   type: "official" | "community" | "legacy";
   description: string;
   releaseDate: string;
-  downloadUrl: string;
+  downloadUrl?: string;
+  assetKey?: string;
+  archiveFormat?: string;
   changelog: string[];
   size: string;
   author: string;

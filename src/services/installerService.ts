@@ -1,5 +1,12 @@
 
 import JSZip from "jszip";
+import {
+  DOWNLOAD_GATEWAY_AUTHORIZE_PATH,
+  DOWNLOAD_GATEWAY_DOWNLOAD_PATH,
+  DOWNLOAD_GATEWAY_STRICT,
+  DOWNLOAD_GATEWAY_TIMEOUT_MS,
+  DOWNLOAD_GATEWAY_URL,
+} from "../constants";
 import { InstallationState, Game, Translation } from "../types";
 
 interface NodeRuntime {
@@ -65,6 +72,198 @@ function sanitizeZipPath(entryPath: string): string {
   return parts.join("/");
 }
 
+interface DownloadResolutionResult {
+  url: string;
+  extensionHint: string;
+  source: "gateway" | "direct";
+}
+
+interface DownloadAuthorizationResponse {
+  downloadUrl?: string;
+  url?: string;
+  signedUrl?: string;
+  token?: string;
+  expiresAt?: string;
+}
+
+function isHttpUrl(value: string): boolean {
+  try {
+    const parsed = new URL(value);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+function normalizeArchiveFormat(value: string | undefined): string {
+  if (!value) return "";
+  const cleaned = value.trim().toLowerCase().replace(/^\./, "");
+  if (!/^[a-z0-9]{2,8}$/.test(cleaned)) return "";
+  return cleaned ? `.${cleaned}` : "";
+}
+
+function inferAssetKeyFromDownloadUrl(downloadUrl: string): string {
+  if (!downloadUrl) return "";
+  try {
+    const parsed = new URL(downloadUrl);
+    return decodeURIComponent(parsed.pathname.replace(/^\/+/, ""));
+  } catch {
+    return "";
+  }
+}
+
+function requestDownloadAuthorization(
+  gatewayEndpoint: string,
+  payload: {
+    gameId: string;
+    translationId: string;
+    assetKey?: string;
+  },
+  runtime: NodeRuntime
+): Promise<DownloadAuthorizationResponse> {
+  const parsedUrl = new URL(gatewayEndpoint);
+  const transport =
+    parsedUrl.protocol === "https:"
+      ? runtime.https
+      : parsedUrl.protocol === "http:"
+        ? runtime.http
+        : null;
+
+  if (!transport) {
+    return Promise.reject(new Error(`Unsupported gateway protocol: ${parsedUrl.protocol}`));
+  }
+
+  return new Promise((resolve, reject) => {
+    const requestBody = JSON.stringify(payload);
+    const timeout = DOWNLOAD_GATEWAY_TIMEOUT_MS;
+    const request = transport.request(
+      parsedUrl,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(requestBody),
+          Accept: "application/json",
+          "Cache-Control": "no-cache",
+          Pragma: "no-cache",
+          "X-Polar-Client": "desktop-app",
+        },
+      },
+      (response) => {
+        const statusCode = response.statusCode ?? 0;
+        const chunks: Uint8Array[] = [];
+        response.on("data", (chunk: Uint8Array) => chunks.push(chunk));
+        response.on("error", reject);
+        response.on("end", () => {
+          const body = Buffer.concat(chunks).toString("utf8");
+
+          if (statusCode < 200 || statusCode >= 300) {
+            reject(new Error(`Gateway authorize request failed (HTTP ${statusCode}): ${body.slice(0, 240)}`));
+            return;
+          }
+
+          try {
+            const parsed = JSON.parse(body) as DownloadAuthorizationResponse;
+            resolve(parsed);
+          } catch (error) {
+            const message = error instanceof Error ? error.message : String(error);
+            reject(new Error(`Gateway authorize response is not valid JSON: ${message}`));
+          }
+        });
+      }
+    );
+
+    const timer = setTimeout(() => {
+      request.destroy(new Error(`Gateway authorize request timed out after ${timeout}ms.`));
+    }, timeout);
+
+    request.on("error", (error) => {
+      clearTimeout(timer);
+      reject(error);
+    });
+    request.on("close", () => {
+      clearTimeout(timer);
+    });
+
+    request.write(requestBody);
+    request.end();
+  });
+}
+
+async function resolveTranslationDownload(
+  game: Game,
+  translation: Translation,
+  runtime: NodeRuntime
+): Promise<DownloadResolutionResult> {
+  const directUrl = (translation.downloadUrl ?? "").trim();
+  const declaredFormat = normalizeArchiveFormat(translation.archiveFormat);
+
+  if (!DOWNLOAD_GATEWAY_URL) {
+    if (!directUrl) {
+      throw new Error(`No downloadUrl available for ${game.title} (${translation.name}).`);
+    }
+    return {
+      url: directUrl,
+      extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
+      source: "direct",
+    };
+  }
+
+  const gatewayEndpoint = new URL(DOWNLOAD_GATEWAY_AUTHORIZE_PATH, DOWNLOAD_GATEWAY_URL).toString();
+  const assetKey = (translation.assetKey ?? "").trim() || inferAssetKeyFromDownloadUrl(directUrl);
+
+  try {
+    const authorized = await requestDownloadAuthorization(
+      gatewayEndpoint,
+      {
+        gameId: game.id,
+        translationId: translation.id,
+        assetKey: assetKey || undefined,
+      },
+      runtime
+    );
+
+    const signed =
+      (authorized.downloadUrl ?? "").trim() ||
+      (authorized.url ?? "").trim() ||
+      (authorized.signedUrl ?? "").trim();
+
+    if (signed && isHttpUrl(signed)) {
+      return {
+        url: signed,
+        extensionHint: declaredFormat || getArchiveExtensionFromUrl(signed) || getArchiveExtensionFromUrl(directUrl),
+        source: "gateway",
+      };
+    }
+
+    const token = (authorized.token ?? "").trim();
+    if (token) {
+      const tokenUrl = new URL(DOWNLOAD_GATEWAY_DOWNLOAD_PATH, DOWNLOAD_GATEWAY_URL);
+      tokenUrl.searchParams.set("token", token);
+      return {
+        url: tokenUrl.toString(),
+        extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
+        source: "gateway",
+      };
+    }
+
+    throw new Error("Gateway authorize response did not include a signed URL or token.");
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    if (DOWNLOAD_GATEWAY_STRICT || !directUrl) {
+      throw new Error(`Secure download authorization failed: ${message}`);
+    }
+
+    console.warn(`[Install] Gateway authorization failed (${message}). Falling back to direct URL.`);
+    return {
+      url: directUrl,
+      extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
+      source: "direct",
+    };
+  }
+}
+
 function downloadArchive(url: string, runtime: NodeRuntime): Promise<Uint8Array> {
   const maxRedirects = 5;
 
@@ -128,6 +327,11 @@ function downloadArchive(url: string, runtime: NodeRuntime): Promise<Uint8Array>
 }
 
 function getArchiveExtensionFromUrl(downloadUrl: string): string {
+  const directHint = normalizeArchiveFormat(downloadUrl);
+  if (directHint) {
+    return directHint;
+  }
+
   try {
     const parsed = new URL(downloadUrl);
     const pathname = decodeURIComponent(parsed.pathname);
@@ -1028,6 +1232,7 @@ async function copyDirectoryIntoGame(
 }
 
 async function installTheLastOfUsPartI(
+  game: Game,
   translation: Translation,
   targetRoot: string,
   runtime: NodeRuntime,
@@ -1056,13 +1261,14 @@ async function installTheLastOfUsPartI(
     onProgress({
       step: "downloading",
       progress: 12,
-      message: "Downloading toolandfilles package...",
+      message: "Authorizing secure tool package download...",
     });
-    const zipBuffer = await downloadArchive(translation.downloadUrl, runtime);
+    const toolPackageDownload = await resolveTranslationDownload(game, translation, runtime);
+    const zipBuffer = await downloadArchive(toolPackageDownload.url, runtime);
 
     const extractionResult = await extractArchiveToTempDirectory(
       zipBuffer,
-      translation.downloadUrl,
+      toolPackageDownload.extensionHint || toolPackageDownload.url,
       runtime,
       onProgress,
       30,
@@ -1220,16 +1426,25 @@ export const installerService = {
       });
 
       if (game.id === TLOU_GAME_ID) {
-        await installTheLastOfUsPartI(translation, targetRoot, runtime, onProgress);
+        await installTheLastOfUsPartI(game, translation, targetRoot, runtime, onProgress);
         return;
       }
 
       // 2. Download patch archive.
-      onProgress({ step: "downloading", progress: 10, message: "Downloading translation patch..." });
-      const archiveBuffer = await downloadArchive(translation.downloadUrl, runtime);
+      onProgress({ step: "downloading", progress: 10, message: "Authorizing patch download..." });
+      const archiveDownload = await resolveTranslationDownload(game, translation, runtime);
+      onProgress({
+        step: "downloading",
+        progress: 12,
+        message:
+          archiveDownload.source === "gateway"
+            ? "Downloading translation patch via secure gateway..."
+            : "Downloading translation patch...",
+      });
+      const archiveBuffer = await downloadArchive(archiveDownload.url, runtime);
       const extractionResult = await extractArchiveToTempDirectory(
         archiveBuffer,
-        translation.downloadUrl,
+        archiveDownload.extensionHint || archiveDownload.url,
         runtime,
         onProgress,
         40,

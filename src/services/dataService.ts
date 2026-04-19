@@ -136,7 +136,9 @@ function normalizeTranslation(raw: unknown, index: number): Translation | null {
     typeValue === "official" || typeValue === "legacy" ? typeValue : "community";
 
   const downloadUrl = normalizeString(source.downloadUrl);
-  if (!downloadUrl) return null;
+  const assetKey = normalizeString(source.assetKey);
+  if (!downloadUrl && !assetKey) return null;
+  const archiveFormat = normalizeString(source.archiveFormat);
 
   const changelogRaw = Array.isArray(source.changelog) ? source.changelog : [];
   const changelog = changelogRaw
@@ -155,7 +157,9 @@ function normalizeTranslation(raw: unknown, index: number): Translation | null {
     type,
     description: normalizeString(source.description, `${name} translation package.`),
     releaseDate,
-    downloadUrl,
+    downloadUrl: downloadUrl || undefined,
+    assetKey: assetKey || undefined,
+    archiveFormat: archiveFormat || undefined,
     changelog,
     size: normalizeString(source.size, "Unknown"),
     author: normalizeString(source.author, "Polar Team"),
@@ -439,7 +443,18 @@ export const dataService = {
   },
 
   async refreshData(): Promise<ContentLoadResult> {
-    return this.fetchData({ forceRemote: true });
+    const remoteAttempt = await this.tryFetchRemote(true, true);
+    if (!remoteAttempt) {
+      throw new Error("Cloudflare content sync failed. Please try refresh again.");
+    }
+
+    this.cacheData(remoteAttempt.data, remoteAttempt.contentVersion);
+    return {
+      data: remoteAttempt.data,
+      source: "remote",
+      contentVersion: remoteAttempt.contentVersion,
+      syncedAt: new Date().toISOString(),
+    };
   },
 
   cacheData(data: AppData, contentVersion: string) {
@@ -457,12 +472,15 @@ export const dataService = {
     return parseCachedEnvelope(getStorageItem(CACHE_KEY));
   },
 
-  async tryFetchRemote(forceRemote: boolean): Promise<{ data: AppData; contentVersion: string } | null> {
+  async tryFetchRemote(
+    forceRemote: boolean,
+    throwOnError = false
+  ): Promise<{ data: AppData; contentVersion: string } | null> {
     try {
       const remoteRaw = await fetchRemoteJson(REMOTE_JSON_URL);
-    const remoteData = normalizeAppData(remoteRaw);
-    assertAppDataUsable(remoteData, "Cloudflare content");
-    const contentVersion = remoteData.contentVersion || remoteData.lastUpdated;
+      const remoteData = normalizeAppData(remoteRaw);
+      assertAppDataUsable(remoteData, "Cloudflare content");
+      const contentVersion = remoteData.contentVersion || remoteData.lastUpdated;
 
       if (forceRemote) {
         console.info(`[Content] Forced refresh succeeded. Version: ${contentVersion}`);
@@ -471,6 +489,9 @@ export const dataService = {
       return { data: remoteData, contentVersion };
     } catch (error) {
       const reason = error instanceof Error ? error.message : String(error);
+      if (throwOnError) {
+        throw new Error(`Cloudflare content sync failed (${reason}).`);
+      }
       console.warn(`[Content] Remote fetch failed (${reason}).`);
       return null;
     }

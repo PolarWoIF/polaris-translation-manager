@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2026-04-19
+
+### Added
+- Added optional secure Cloudflare download gateway support with short-lived authorization flow (`VITE_DOWNLOAD_GATEWAY_URL`).
+- Added strict gateway mode (`VITE_DOWNLOAD_GATEWAY_STRICT`) to block fallback direct downloads in hardened deployments.
+- Added Cloudflare Worker template for protected patch delivery at `cloudflare/download-gateway-worker.js`.
+- Added secure content preparation script: `npm run content:secure:prepare` (outputs `assetKey` manifest-based content).
+- Added documentation for security deployment and gateway rollout in `docs/cloudflare-security.md`.
+
+### Changed
+- Installer now resolves patch downloads through gateway when configured, while preserving existing install UX.
+- Translation schema now supports `assetKey` and `archiveFormat` (in addition to `downloadUrl`) for private bucket architecture.
+- Release packaging now produces official installer EXE only (plus updater metadata), removing portable/zip release outputs.
+- Production renderer build hardened with terser minification, no sourcemaps, and dropped debug console output.
+- Branding consistency improved by shipping a dedicated runtime icon resource for packaged builds.
+
+### Fixed
+- Validation now accepts secure manifest-based entries (`assetKey`) so content updates remain compatible in protected mode.
+
 ## [1.0.4] - 2026-04-18
 
 ### Fixed

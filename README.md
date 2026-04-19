@@ -29,7 +29,7 @@ npm run electron:dev
 ```bash
 npm run build
 ```
-- Build Windows installer + portable + zip:
+- Build official Windows installer (NSIS EXE):
 ```bash
 npm run build:desktop
 ```
@@ -49,6 +49,20 @@ Behavior:
 - If cache missing, use bundled `public/data.json`
 - Startup refresh checks remote content every launch
 - Manual refresh button re-checks Cloudflare on demand
+
+### Secure Download Gateway (Recommended)
+For production hardening:
+- Keep R2 patch bucket private
+- Use Cloudflare Worker download gateway for short-lived authorized links
+- Enable strict mode in app build:
+```bash
+VITE_DOWNLOAD_GATEWAY_URL="https://downloads.your-domain.com"
+VITE_DOWNLOAD_GATEWAY_STRICT="true"
+```
+
+Docs and worker template:
+- `docs/cloudflare-security.md`
+- `cloudflare/download-gateway-worker.js`
 
 ## App Self-Update
 Packaged Windows builds check GitHub Releases on startup:
@@ -81,7 +95,9 @@ Packaged Windows builds check GitHub Releases on startup:
           "type": "community",
           "description": "....",
           "releaseDate": "2026-04-17",
-          "downloadUrl": "https://...",
+          "downloadUrl": "https://...", 
+          "assetKey": "games/the_last_faith/ar/v1/thelastfaithv1.zip",
+          "archiveFormat": "zip",
           "changelog": ["Initial release"],
           "size": "32.9 MB",
           "author": "Polaris Team"
@@ -121,7 +137,9 @@ git push && git push --tags
 - `npm run icons:generate` - Regenerate Windows `.ico` files from PNG sizes
 - `npm run lint` - TypeScript type check
 - `npm run validate:content` - Validate bundled `public/data.json`
+- `npm run sync:cloudflare-content` - Pull latest `translations.json` from Cloudflare into `public/data.json`
+- `npm run content:secure:prepare` - Generate secure content + manifest (`assetKey` based, no direct URLs)
 - `npm run verify:existing-user-update` - Simulate installed-user Cloudflare content update flow
 - `npm run build` - Production renderer build
-- `npm run build:desktop` - Build installer + portable EXE
+- `npm run build:desktop` - Build official installer EXE only
 - `npm run build:release` - Clean + lint + package

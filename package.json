@@ -2,7 +2,7 @@
   "name": "polar-translation",
   "productName": "Polar Translation",
   "private": false,
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "main": "electron.cjs",
   "scripts": {
@@ -13,13 +13,13 @@
     "icons:generate": "node scripts/generate-windows-icons.mjs",
     "lint": "tsc --noEmit",
     "validate:content": "node scripts/validate-content.mjs",
+    "sync:cloudflare-content": "node scripts/sync-cloudflare-content.mjs",
+    "content:secure:prepare": "node scripts/prepare-secure-content.mjs",
     "verify:existing-user-update": "tsx scripts/verify-existing-user-update.ts",
     "electron:dev": "electron .",
-    "electron:build": "npm run build && electron-builder --win nsis portable zip --x64",
+    "electron:build": "npm run build && electron-builder --win nsis --x64",
     "build:renderer": "vite build",
-    "build:desktop": "npm run icons:generate && npm run build:renderer && electron-builder --win nsis portable zip --x64",
-    "build:portable": "npm run build:renderer && electron-builder --win portable --x64",
-    "build:zip": "npm run build:renderer && electron-builder --win zip --x64",
+    "build:desktop": "npm run icons:generate && npm run build:renderer && electron-builder --win nsis --x64",
     "build:release": "npm run clean && npm run lint && npm run validate:content && npm run verify:existing-user-update && npm run build:desktop",
     "build:exe": "npm run build:desktop",
     "version:check": "node -e \"const v=require('./package.json').version; if(!/^\\d+\\.\\d+\\.\\d+$/.test(v)){throw new Error('Version must be semver x.y.z')}}\""
@@ -28,6 +28,7 @@
     "appId": "com.polar.translation",
     "productName": "Polar Translation",
     "asar": true,
+    "compression": "maximum",
     "directories": {
       "output": "dist_electron"
     },
@@ -38,6 +39,12 @@
       "!backups/**/*",
       "!dist_electron/**/*"
     ],
+    "extraResources": [
+      {
+        "from": "public/assets/red-set/windows/icon.ico",
+        "to": "icon.ico"
+      }
+    ],
     "extraMetadata": {
       "main": "electron.cjs"
     },
@@ -47,18 +54,6 @@
       "target": [
         {
           "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "portable",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "zip",
           "arch": [
             "x64"
           ]
@@ -77,9 +72,6 @@
       "uninstallerIcon": "public/assets/red-set/windows/icon.ico",
       "installerHeaderIcon": "public/assets/red-set/windows/icon.ico",
       "artifactName": "Polar-Translation-Setup-${version}.${ext}"
-    },
-    "portable": {
-      "artifactName": "Polar-Translation-Portable-${version}.${ext}"
     },
     "publish": [
       {
@@ -108,6 +100,7 @@
     "electron-builder": "^26.8.1",
     "png-to-ico": "^3.0.1",
     "tailwindcss": "^4.1.14",
+    "terser": "^5.43.1",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"

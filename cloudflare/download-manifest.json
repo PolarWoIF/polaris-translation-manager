@@ -1,0 +1,184 @@
+{
+  "entries": [
+    {
+      "gameId": "amnesia-the-bunker",
+      "translationId": "amnesia-the-bunker-ar-v1",
+      "assetKey": "games/Amnesia_The_Bunker/ar/v1/Amnesia_etrdream.zip"
+    },
+    {
+      "gameId": "bad-north",
+      "translationId": "bad-north-ar-v1",
+      "assetKey": "games/Bad_north/ar/v1/BadNorth_Data.zip"
+    },
+    {
+      "gameId": "clair-obscur-expedition-33",
+      "translationId": "clair-obscur-expedition-33-ar-v1",
+      "assetKey": "games/Clair_obscur_Expedition33/ar/v1/Sandfall.zip"
+    },
+    {
+      "gameId": "codevein",
+      "translationId": "codevein-ar-v1",
+      "assetKey": "games/CodeVein/ar/v1/CodeVein.zip"
+    },
+    {
+      "gameId": "code-vein-2",
+      "translationId": "code-vein-2-ar-v1",
+      "assetKey": "games/code_vein_2/ar/v1/CodeVein2.zip"
+    },
+    {
+      "gameId": "cuphead",
+      "translationId": "cuphead-ar-v1",
+      "assetKey": "games/Cuphead/ar/v1/Cuphead_Data.zip"
+    },
+    {
+      "gameId": "half-life",
+      "translationId": "half-life-ar-v1",
+      "assetKey": "games/Half_Life/ar/v1/zwi2l3.zip"
+    },
+    {
+      "gameId": "hollow-knight",
+      "translationId": "hollow-knight-ar-v1",
+      "assetKey": "games/Hollow_Knight/ar/v1/Hollow_Knight.zip"
+    },
+    {
+      "gameId": "lethal-company",
+      "translationId": "lethal-company-ar-v1",
+      "assetKey": "games/Lethal_Company/ar/v1/LC_AR.zip"
+    },
+    {
+      "gameId": "nier-replicant",
+      "translationId": "nier-replicant-ar-v1",
+      "assetKey": "games/NieR_Replicant/ar/v1/data.zip"
+    },
+    {
+      "gameId": "ori-and-the-will-of-the-wisps",
+      "translationId": "ori-and-the-will-of-the-wisps-ar-v1",
+      "assetKey": "games/Ori_and_the_Will_of_the_Wisps/ar/v1/oriDE_Data.zip"
+    },
+    {
+      "gameId": "outlast-1",
+      "translationId": "outlast-1-ar-v1",
+      "assetKey": "games/outlast_1/ar/v1/OLGame.zip"
+    },
+    {
+      "gameId": "outlast-2",
+      "translationId": "outlast-2-ar-v1",
+      "assetKey": "games/outlast_2/ar/v1/OLGame.zip"
+    },
+    {
+      "gameId": "peak",
+      "translationId": "peak-ar-v1",
+      "assetKey": "games/Peak/ar/v1/Peak.zip"
+    },
+    {
+      "gameId": "r-e-p-o",
+      "translationId": "r-e-p-o-ar-v1",
+      "assetKey": "games/R.E.P.O/ar/v1/REPO_ETRD v3.zip"
+    },
+    {
+      "gameId": "silent-hill-2-remake",
+      "translationId": "silent-hill-2-remake-ar-v1",
+      "assetKey": "games/Silent_Hill_2_Remake/ar/v1/SHProto.zip"
+    },
+    {
+      "gameId": "silent-hill-f",
+      "translationId": "silent-hill-f-ar-v1",
+      "assetKey": "games/Silent_Hill_f/ar/v1/SHf.zip"
+    },
+    {
+      "gameId": "stellar-blade",
+      "translationId": "stellar-blade-ar-v1",
+      "assetKey": "games/Stellar_Blade/ar/v1/SB.zip"
+    },
+    {
+      "gameId": "the-first-berserker-khazan",
+      "translationId": "the-first-berserker-khazan-ar-v1",
+      "assetKey": "games/the_first_Berserker_Khazan/ar/v1/BBQ.zip"
+    },
+    {
+      "gameId": "the-last-faith",
+      "translationId": "the-last-faith-ar-v1",
+      "assetKey": "games/the_last_faith/ar/v1/thelastfaithv1.zip"
+    },
+    {
+      "gameId": "the-last-of-us-part-i",
+      "translationId": "the-last-of-us-part-i-ar-v1",
+      "assetKey": "games/The_Last_of_Us_Part_I/ar/v1/toolandfilles.zip"
+    },
+    {
+      "gameId": "untitled-goose-game",
+      "translationId": "untitled-goose-game-ar-v1",
+      "assetKey": "games/Untitled_Goose_Game/ar/v1/UntitledGooseGame_Data.ZIP"
+    },
+    {
+      "gameId": "wuchang-fallen-feathers",
+      "translationId": "wuchang-fallen-feathers-ar-v1",
+      "assetKey": "games/Wuchang_Fallen_Feathers/ar/v1/Wuchang_AR_1.0.zip"
+    },
+    {
+      "gameId": "haunted-room-205",
+      "translationId": "haunted-room-205-ar-v1",
+      "assetKey": "games/Haunted_Room_205/ar/v1/projectCZW.zip"
+    },
+    {
+      "gameId": "batman-arkham-knight",
+      "translationId": "batman-arkham-knight-ar-v1",
+      "assetKey": "games/Batman_Arkham_Knight/ar/Batman_AA_ARABIzation_v3.5_Final_Full.zip"
+    },
+    {
+      "gameId": "dispatch",
+      "translationId": "dispatch-ar-v1",
+      "assetKey": "games/Dispatch/ar/v1/Content.zip"
+    },
+    {
+      "gameId": "sekiro-shadows-die-twice-goty-edition",
+      "translationId": "sekiro-shadows-die-twice-goty-edition-ar-v1",
+      "assetKey": "games/Sekiro_Shadows_Die_Twice/ar/v1/games_Sekiro_Shadows_Die_Twice_ar_v1_Sekiro.zip"
+    },
+    {
+      "gameId": "subliminal",
+      "translationId": "subliminal-ar-v1",
+      "assetKey": "games/Subliminal/ar/v1/Subliminal.zip"
+    },
+    {
+      "gameId": "the-evil-within-2",
+      "translationId": "the-evil-within-2-ar-v1",
+      "assetKey": "games/The_Evil_Within_2/ar/v1/The Evil Within 2.zip"
+    },
+    {
+      "gameId": "firewatch",
+      "translationId": "firewatch-ar-v1",
+      "assetKey": "games/Firewatch/ar/v1/Firewatch_Data.7z"
+    },
+    {
+      "gameId": "mouthwashing",
+      "translationId": "mouthwashing-ar-v1",
+      "assetKey": "games/Mouthwashing/ar/v1/Mouthwashing1.2.zip"
+    },
+    {
+      "gameId": "mouse-p-i-for-hire",
+      "translationId": "mouse-p-i-for-hire-ar-v1",
+      "assetKey": "games/MOUSE_P_I_For_Hire/ar/v1/MOUSE_Data.zip"
+    },
+    {
+      "gameId": "bioshock-infinite",
+      "translationId": "bioshock-infinite-ar-v1",
+      "assetKey": "games/BioShock_Infinite/ar/v1/XGame.zip"
+    },
+    {
+      "gameId": "hollow-knight-silksong",
+      "translationId": "hollow-knight-silksong-ar-v1",
+      "assetKey": "games/Hollow_Knight_Silksong/ar/v1/Hollow Knight Silksong_Data.zip"
+    },
+    {
+      "gameId": "the-last-of-us-part-ii-remastered",
+      "translationId": "the-last-of-us-part-ii-remastered-ar-v1",
+      "assetKey": "games/The_Last_of_Us_Part_II/ar/v1/The Last of Us II-2.zip"
+    },
+    {
+      "gameId": "fallout-4",
+      "translationId": "fallout-4-ar-v1",
+      "assetKey": "games/fallout_4/ar/v1/strings.zip"
+    }
+  ]
+}

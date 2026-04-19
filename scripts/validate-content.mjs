@@ -147,8 +147,11 @@ async function main() {
         errors.push(`${tLabel}.name is required.`);
       }
 
-      if (!isLikelyUrlOrPath(translation.downloadUrl)) {
-        errors.push(`${tLabel}.downloadUrl must be a valid URL/path.`);
+      const hasDownloadUrl = isLikelyUrlOrPath(translation.downloadUrl);
+      const hasAssetKey = isNonEmptyString(translation.assetKey);
+
+      if (!hasDownloadUrl && !hasAssetKey) {
+        errors.push(`${tLabel} must include either downloadUrl or assetKey.`);
       }
     }
   }
