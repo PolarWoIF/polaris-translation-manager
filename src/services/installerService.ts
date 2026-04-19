@@ -7,7 +7,7 @@ import {
   DOWNLOAD_GATEWAY_TIMEOUT_MS,
   DOWNLOAD_GATEWAY_URL,
 } from "../constants";
-import { InstallationState, Game, Translation } from "../types";
+import { InstallationState, Game, Translation, TranslationDownloadPart } from "../types";
 
 interface NodeRuntime {
   fs: typeof import("node:fs/promises");
@@ -76,6 +76,14 @@ interface DownloadResolutionResult {
   url: string;
   extensionHint: string;
   source: "gateway" | "direct";
+  label: string;
+}
+
+interface DownloadRequestTarget {
+  label: string;
+  downloadUrl?: string;
+  assetKey?: string;
+  archiveFormat?: string;
 }
 
 interface DownloadAuthorizationResponse {
@@ -192,32 +200,35 @@ function requestDownloadAuthorization(
 
 async function resolveTranslationDownload(
   game: Game,
-  translation: Translation,
+  translationId: string,
+  target: DownloadRequestTarget,
   runtime: NodeRuntime
 ): Promise<DownloadResolutionResult> {
-  const directUrl = (translation.downloadUrl ?? "").trim();
-  const declaredFormat = normalizeArchiveFormat(translation.archiveFormat);
+  const directUrl = (target.downloadUrl ?? "").trim();
+  const declaredFormat = normalizeArchiveFormat(target.archiveFormat);
+  const label = target.label.trim() || "patch";
 
   if (!DOWNLOAD_GATEWAY_URL) {
     if (!directUrl) {
-      throw new Error(`No downloadUrl available for ${game.title} (${translation.name}).`);
+      throw new Error(`No download URL available for ${game.title} (${label}).`);
     }
     return {
       url: directUrl,
       extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
       source: "direct",
+      label,
     };
   }
 
   const gatewayEndpoint = new URL(DOWNLOAD_GATEWAY_AUTHORIZE_PATH, DOWNLOAD_GATEWAY_URL).toString();
-  const assetKey = (translation.assetKey ?? "").trim() || inferAssetKeyFromDownloadUrl(directUrl);
+  const assetKey = (target.assetKey ?? "").trim() || inferAssetKeyFromDownloadUrl(directUrl);
 
   try {
     const authorized = await requestDownloadAuthorization(
       gatewayEndpoint,
       {
         gameId: game.id,
-        translationId: translation.id,
+        translationId,
         assetKey: assetKey || undefined,
       },
       runtime
@@ -233,6 +244,7 @@ async function resolveTranslationDownload(
         url: signed,
         extensionHint: declaredFormat || getArchiveExtensionFromUrl(signed) || getArchiveExtensionFromUrl(directUrl),
         source: "gateway",
+        label,
       };
     }
 
@@ -244,6 +256,7 @@ async function resolveTranslationDownload(
         url: tokenUrl.toString(),
         extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
         source: "gateway",
+        label,
       };
     }
 
@@ -260,8 +273,44 @@ async function resolveTranslationDownload(
       url: directUrl,
       extensionHint: declaredFormat || getArchiveExtensionFromUrl(directUrl),
       source: "direct",
+      label,
     };
   }
+}
+
+async function resolveTranslationDownloads(
+  game: Game,
+  translation: Translation,
+  runtime: NodeRuntime
+): Promise<DownloadResolutionResult[]> {
+  const parts = Array.isArray(translation.downloadParts) ? translation.downloadParts : [];
+
+  const targets: DownloadRequestTarget[] =
+    parts.length > 0
+      ? parts.map((part: TranslationDownloadPart, index) => ({
+          label:
+            (part.name ?? "").trim() ||
+            (part.id ?? "").trim() ||
+            `Part ${index + 1}`,
+          downloadUrl: part.downloadUrl,
+          assetKey: part.assetKey,
+          archiveFormat: part.archiveFormat,
+        }))
+      : [
+          {
+            label: translation.name,
+            downloadUrl: translation.downloadUrl,
+            assetKey: translation.assetKey,
+            archiveFormat: translation.archiveFormat,
+          },
+        ];
+
+  const resolved: DownloadResolutionResult[] = [];
+  for (const target of targets) {
+    const item = await resolveTranslationDownload(game, translation.id, target, runtime);
+    resolved.push(item);
+  }
+  return resolved;
 }
 
 function downloadArchive(url: string, runtime: NodeRuntime): Promise<Uint8Array> {
@@ -1263,7 +1312,11 @@ async function installTheLastOfUsPartI(
       progress: 12,
       message: "Authorizing secure tool package download...",
     });
-    const toolPackageDownload = await resolveTranslationDownload(game, translation, runtime);
+    const tlouDownloads = await resolveTranslationDownloads(game, translation, runtime);
+    if (tlouDownloads.length !== 1) {
+      throw new Error("The Last of Us Part I expects a single tool package download.");
+    }
+    const toolPackageDownload = tlouDownloads[0];
     const zipBuffer = await downloadArchive(toolPackageDownload.url, runtime);
 
     const extractionResult = await extractArchiveToTempDirectory(
@@ -1430,60 +1483,77 @@ export const installerService = {
         return;
       }
 
-      // 2. Download patch archive.
-      onProgress({ step: "downloading", progress: 10, message: "Authorizing patch download..." });
-      const archiveDownload = await resolveTranslationDownload(game, translation, runtime);
-      onProgress({
-        step: "downloading",
-        progress: 12,
-        message:
-          archiveDownload.source === "gateway"
-            ? "Downloading translation patch via secure gateway..."
-            : "Downloading translation patch...",
-      });
-      const archiveBuffer = await downloadArchive(archiveDownload.url, runtime);
-      const extractionResult = await extractArchiveToTempDirectory(
-        archiveBuffer,
-        archiveDownload.extensionHint || archiveDownload.url,
-        runtime,
-        onProgress,
-        40,
-        58,
-        "Extracting patch files"
-      );
-      const temporaryExtractionRoot = extractionResult.extractionRoot;
-      const files = extractionResult.extractedFiles;
-
       const installedFiles: string[] = [];
+      // 2. Resolve one or more patch archives.
+      onProgress({ step: "downloading", progress: 10, message: "Authorizing patch download..." });
+      const archiveDownloads = await resolveTranslationDownloads(game, translation, runtime);
+      const totalParts = archiveDownloads.length;
 
-      try {
-        // 3. Copy patched files to game folder (overwrite in place) preserving archive relative paths.
-        for (let index = 0; index < files.length; index += 1) {
-          const sourcePath = files[index];
-          const archiveRelativePath = runtime.path.relative(temporaryExtractionRoot, sourcePath);
-          const relativePath = sanitizeZipPath(archiveRelativePath);
-          const destinationPath = runtime.path.resolve(targetRoot, relativePath);
+      for (let partIndex = 0; partIndex < archiveDownloads.length; partIndex += 1) {
+        const archiveDownload = archiveDownloads[partIndex];
+        const partLabel =
+          totalParts > 1 ? `${archiveDownload.label} (${partIndex + 1}/${totalParts})` : archiveDownload.label;
 
-          if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
-            throw new Error(`Blocked unsafe file path in archive: ${archiveRelativePath}`);
-          }
+        const baseOffset = Math.floor((partIndex / totalParts) * 86);
+        const nextOffset = Math.floor(((partIndex + 1) / totalParts) * 86);
+        const partStart = 10 + baseOffset;
+        const partEnd = 10 + nextOffset;
+        const extractionStart = Math.max(partStart + 4, Math.min(partStart + 18, partEnd - 8));
+        const extractionEnd = Math.max(extractionStart + 1, Math.min(extractionStart + 12, partEnd - 4));
+        const copyStart = Math.max(extractionEnd + 1, partEnd - 3);
+        const copyEnd = Math.max(copyStart, partEnd);
 
-          await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
-          await runtime.fs.copyFile(sourcePath, destinationPath);
-          installedFiles.push(relativePath);
+        onProgress({
+          step: "downloading",
+          progress: Math.min(partStart, 95),
+          message:
+            archiveDownload.source === "gateway"
+              ? `Downloading ${partLabel} via secure gateway...`
+              : `Downloading ${partLabel}...`,
+        });
 
-          const progress = 60 + Math.round(((index + 1) / files.length) * 39);
-          onProgress({
-            step: "copying",
-            progress: Math.min(progress, 99),
-            message: `Applying files ${index + 1}/${files.length}...`,
-          });
-        }
-      } finally {
+        const archiveBuffer = await downloadArchive(archiveDownload.url, runtime);
+        const extractionResult = await extractArchiveToTempDirectory(
+          archiveBuffer,
+          archiveDownload.extensionHint || archiveDownload.url,
+          runtime,
+          onProgress,
+          extractionStart,
+          extractionEnd,
+          `Extracting ${partLabel}`
+        );
+        const temporaryExtractionRoot = extractionResult.extractionRoot;
+        const files = extractionResult.extractedFiles;
+
         try {
-          await runtime.fs.rm(temporaryExtractionRoot, { recursive: true, force: true });
-        } catch {
-          // Best-effort cleanup for temporary extraction files.
+          // 3. Copy patched files to game folder (overwrite in place) preserving archive relative paths.
+          for (let fileIndex = 0; fileIndex < files.length; fileIndex += 1) {
+            const sourcePath = files[fileIndex];
+            const archiveRelativePath = runtime.path.relative(temporaryExtractionRoot, sourcePath);
+            const relativePath = sanitizeZipPath(archiveRelativePath);
+            const destinationPath = runtime.path.resolve(targetRoot, relativePath);
+
+            if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
+              throw new Error(`Blocked unsafe file path in archive: ${archiveRelativePath}`);
+            }
+
+            await runtime.fs.mkdir(runtime.path.dirname(destinationPath), { recursive: true });
+            await runtime.fs.copyFile(sourcePath, destinationPath);
+            installedFiles.push(relativePath);
+
+            const fileProgress = copyStart + Math.round(((fileIndex + 1) / files.length) * (copyEnd - copyStart));
+            onProgress({
+              step: "copying",
+              progress: Math.min(fileProgress, 99),
+              message: `Applying ${partLabel} files ${fileIndex + 1}/${files.length}...`,
+            });
+          }
+        } finally {
+          try {
+            await runtime.fs.rm(temporaryExtractionRoot, { recursive: true, force: true });
+          } catch {
+            // Best-effort cleanup for temporary extraction files.
+          }
         }
       }
 

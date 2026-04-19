@@ -149,9 +149,28 @@ async function main() {
 
       const hasDownloadUrl = isLikelyUrlOrPath(translation.downloadUrl);
       const hasAssetKey = isNonEmptyString(translation.assetKey);
+      const parts = Array.isArray(translation.downloadParts) ? translation.downloadParts : [];
+      const hasParts = parts.length > 0;
 
-      if (!hasDownloadUrl && !hasAssetKey) {
-        errors.push(`${tLabel} must include either downloadUrl or assetKey.`);
+      if (!hasDownloadUrl && !hasAssetKey && !hasParts) {
+        errors.push(`${tLabel} must include downloadUrl/assetKey or downloadParts[].`);
+      }
+
+      if (hasParts) {
+        for (let pIndex = 0; pIndex < parts.length; pIndex += 1) {
+          const part = parts[pIndex];
+          const pLabel = `${tLabel}.downloadParts[${pIndex}]`;
+          if (!part || typeof part !== "object") {
+            errors.push(`${pLabel} must be an object.`);
+            continue;
+          }
+
+          const partHasUrl = isLikelyUrlOrPath(part.downloadUrl);
+          const partHasAssetKey = isNonEmptyString(part.assetKey);
+          if (!partHasUrl && !partHasAssetKey) {
+            errors.push(`${pLabel} must include downloadUrl or assetKey.`);
+          }
+        }
       }
     }
   }

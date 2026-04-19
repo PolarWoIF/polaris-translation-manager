@@ -98,6 +98,22 @@ Packaged Windows builds check GitHub Releases on startup:
           "downloadUrl": "https://...", 
           "assetKey": "games/the_last_faith/ar/v1/thelastfaithv1.zip",
           "archiveFormat": "zip",
+          "downloadParts": [
+            {
+              "id": "part-1",
+              "name": "Part 1",
+              "downloadUrl": "https://...",
+              "assetKey": "games/.../part1.7z",
+              "archiveFormat": "7z"
+            },
+            {
+              "id": "part-2",
+              "name": "Part 2",
+              "downloadUrl": "https://...",
+              "assetKey": "games/.../part2.7z",
+              "archiveFormat": "7z"
+            }
+          ],
           "changelog": ["Initial release"],
           "size": "32.9 MB",
           "author": "Polaris Team"

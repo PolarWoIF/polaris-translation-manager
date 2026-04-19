@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2026-04-19
+
+### Added
+- Added support for multi-part translation downloads via `downloadParts[]` (sequential download/apply order).
+
+### Changed
+- Installer now processes patch parts in order (Part 1 -> Part 2 -> ...), then applies files safely to the game folder.
+- Content normalizer/validator now accepts translation records that use `downloadParts` with `downloadUrl` or `assetKey` per part.
+- Secure content preparation script now converts `downloadParts` entries to secure `assetKey` format and manifest entries.
+
+### Fixed
+- Firewatch-style split archives are now supported by app logic when remote JSON provides two parts.
+
 ## [1.0.5] - 2026-04-19
 
 ### Added

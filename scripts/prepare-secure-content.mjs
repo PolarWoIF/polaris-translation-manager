@@ -37,6 +37,40 @@ async function main() {
   for (const game of games) {
     const translations = Array.isArray(game.translations) ? game.translations : [];
     for (const translation of translations) {
+      const parts = Array.isArray(translation.downloadParts) ? translation.downloadParts : [];
+      if (parts.length > 0) {
+        for (let partIndex = 0; partIndex < parts.length; partIndex += 1) {
+          const part = parts[partIndex];
+          if (!part || typeof part !== "object") continue;
+
+          const partDownloadUrl = typeof part.downloadUrl === "string" ? part.downloadUrl.trim() : "";
+          const partAssetKey = (typeof part.assetKey === "string" ? part.assetKey.trim() : "") || toAssetKey(partDownloadUrl);
+          const partArchiveFormat =
+            (typeof part.archiveFormat === "string" ? part.archiveFormat.trim().replace(/^\./, "") : "") ||
+            getExtension(partDownloadUrl);
+
+          if (!partAssetKey) continue;
+
+          part.assetKey = partAssetKey;
+          if (partArchiveFormat) {
+            part.archiveFormat = partArchiveFormat;
+          }
+          delete part.downloadUrl;
+
+          entries.push({
+            gameId: game.id,
+            translationId: translation.id,
+            assetKey: partAssetKey,
+            partId: typeof part.id === "string" && part.id.trim() ? part.id.trim() : `part-${partIndex + 1}`,
+          });
+        }
+
+        delete translation.downloadUrl;
+        delete translation.assetKey;
+        delete translation.archiveFormat;
+        continue;
+      }
+
       const downloadUrl = typeof translation.downloadUrl === "string" ? translation.downloadUrl.trim() : "";
       const assetKey = (typeof translation.assetKey === "string" ? translation.assetKey.trim() : "") || toAssetKey(downloadUrl);
       const archiveFormat =

@@ -56,6 +56,7 @@ Behavior:
 ## Content JSON Migration
 - To stop exposing direct R2 links in content JSON:
   - Use `assetKey` + `archiveFormat`.
+  - For split archives, use `downloadParts[]` and provide each part in order.
   - Optionally remove `downloadUrl`.
 - Helper script:
   - `npm run content:secure:prepare`

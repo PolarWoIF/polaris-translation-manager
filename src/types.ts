@@ -1,4 +1,12 @@
 
+export interface TranslationDownloadPart {
+  id?: string;
+  name?: string;
+  downloadUrl?: string;
+  assetKey?: string;
+  archiveFormat?: string;
+}
+
 export interface Translation {
   id: string;
   name: string;
@@ -9,6 +17,7 @@ export interface Translation {
   downloadUrl?: string;
   assetKey?: string;
   archiveFormat?: string;
+  downloadParts?: TranslationDownloadPart[];
   changelog: string[];
   size: string;
   author: string;

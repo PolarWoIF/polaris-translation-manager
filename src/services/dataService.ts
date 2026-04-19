@@ -1,4 +1,4 @@
-import { AppData, Game, Translation } from "../types";
+import { AppData, Game, Translation, TranslationDownloadPart } from "../types";
 import {
   CACHE_KEY,
   CACHE_SCHEMA_VERSION,
@@ -137,8 +137,30 @@ function normalizeTranslation(raw: unknown, index: number): Translation | null {
 
   const downloadUrl = normalizeString(source.downloadUrl);
   const assetKey = normalizeString(source.assetKey);
-  if (!downloadUrl && !assetKey) return null;
   const archiveFormat = normalizeString(source.archiveFormat);
+  const rawParts = Array.isArray(source.downloadParts) ? source.downloadParts : [];
+  const downloadParts = rawParts
+    .map((rawPart, partIndex) => {
+      const partSource =
+        rawPart && typeof rawPart === "object" ? (rawPart as Record<string, unknown>) : null;
+      if (!partSource) return null;
+
+      const partDownloadUrl = normalizeString(partSource.downloadUrl);
+      const partAssetKey = normalizeString(partSource.assetKey);
+      if (!partDownloadUrl && !partAssetKey) return null;
+
+      const part: TranslationDownloadPart = {
+        id: normalizeString(partSource.id, `${id}-part-${partIndex + 1}`),
+        name: normalizeString(partSource.name, `Part ${partIndex + 1}`),
+        downloadUrl: partDownloadUrl || undefined,
+        assetKey: partAssetKey || undefined,
+        archiveFormat: normalizeString(partSource.archiveFormat) || undefined,
+      };
+      return part;
+    })
+    .filter((part): part is TranslationDownloadPart => Boolean(part));
+
+  if (!downloadUrl && !assetKey && downloadParts.length === 0) return null;
 
   const changelogRaw = Array.isArray(source.changelog) ? source.changelog : [];
   const changelog = changelogRaw
@@ -160,6 +182,7 @@ function normalizeTranslation(raw: unknown, index: number): Translation | null {
     downloadUrl: downloadUrl || undefined,
     assetKey: assetKey || undefined,
     archiveFormat: archiveFormat || undefined,
+    downloadParts: downloadParts.length > 0 ? downloadParts : undefined,
     changelog,
     size: normalizeString(source.size, "Unknown"),
     author: normalizeString(source.author, "Polar Team"),
