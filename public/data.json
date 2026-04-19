@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-18T22:08:29.999Z",
+  "lastUpdated": "2026-04-19T04:48:24.796Z",
   "categories": [
     "Action",
     "Adventure",
@@ -835,15 +835,29 @@
           "version": "1.0.0",
           "type": "community",
           "description": "Arabic localization package for Firewatch.",
-          "releaseDate": "2026-04-18",
-          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Firewatch/ar/v1/Firewatch_Data.7z",
+          "releaseDate": "2026-04-19",
           "changelog": [
+            "Updated to split package (Part 1 + Part 2).",
             "Initial Arabic release",
             "Localized UI and dialogues",
             "Adjusted text rendering and spacing"
           ],
-          "size": "223.0 MB",
-          "author": "Polaris Team"
+          "size": "315.4 MB",
+          "author": "Polaris Team",
+          "downloadParts": [
+            {
+              "id": "part-1",
+              "name": "Part 1",
+              "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Firewatch/ar/v1/firewatchpart1.zip",
+              "archiveFormat": "zip"
+            },
+            {
+              "id": "part-2",
+              "name": "Part 2",
+              "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Firewatch/ar/v1/firewatchpart2.zip",
+              "archiveFormat": "zip"
+            }
+          ]
         }
       ]
     },
@@ -1014,7 +1028,231 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "dollmare",
+      "title": "Dollmare",
+      "category": "Adventure",
+      "rating": 4.7,
+      "description": "You've accepted a shady job offer at a doll factory. Inspect dolls for defects and anomalies, follow strange protocols, and survive.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2793710/header.jpg?t=1752748859",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2793710/header.jpg?t=1752748859",
+      "executable": "",
+      "translations": [
+        {
+          "id": "dollmare-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Dollmare.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Dollmare/ar/v1/ToyFactory.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "enotria-the-last-song",
+      "title": "Enotria: The Last Song",
+      "category": "Action",
+      "rating": 3.4,
+      "description": "A soulslike adventure inspired by Italian folklore where the brightest sun casts the darkest shadow.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2102450/header.jpg?t=1730220222",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2102450/header.jpg?t=1730220222",
+      "executable": "",
+      "translations": [
+        {
+          "id": "enotria-the-last-song-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Enotria: The Last Song.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Enotria_The_Last_Song/ar/v1/Enotria.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "fobia-st-dinfna-hotel",
+      "title": "Fobia - St. Dinfna Hotel",
+      "category": "Adventure",
+      "rating": 4.2,
+      "description": "Explore a decadent hotel across different timelines and uncover the dark history of a fanatical cult.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1298140/header.jpg?t=1725487910",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1298140/header.jpg?t=1725487910",
+      "executable": "",
+      "translations": [
+        {
+          "id": "fobia-st-dinfna-hotel-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Fobia - St. Dinfna Hotel.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Fobia_St_Dinfna_Hotel/ar/v1/Fobia.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "87.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "palworld",
+      "title": "Palworld",
+      "category": "Action",
+      "rating": 4.7,
+      "description": "Fight, farm, build and work alongside mysterious creatures called Pals in this open-world survival crafting game.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1623730/058bd87dc17a7179e07c446aa64d0574ca43ab9d/header.jpg?t=1773936597",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1623730/058bd87dc17a7179e07c446aa64d0574ca43ab9d/header.jpg?t=1773936597",
+      "executable": "",
+      "translations": [
+        {
+          "id": "palworld-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Palworld.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Palworld/ar/v1/Pal.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "9.7 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "retrace-the-light",
+      "title": "Retrace the Light",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "A 2.5D action-adventure featuring spatial retracing mechanics in a futuristic world.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2179370/16888ec529f3682fbfad4d6e1c846bdbfe033d67/header.jpg?t=1770892675",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2179370/16888ec529f3682fbfad4d6e1c846bdbfe033d67/header.jpg?t=1770892675",
+      "executable": "",
+      "translations": [
+        {
+          "id": "retrace-the-light-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Retrace the Light.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/RetraceTheLight/ar/v1/RetraceTheLight.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "star-wars-outlaws",
+      "title": "Star Wars Outlaws",
+      "category": "Action",
+      "rating": 3.6,
+      "description": "Experience the first open-world Star Wars game and explore iconic and new locations across the galaxy.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2842040/header.jpg?t=1773407100",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2842040/header.jpg?t=1773407100",
+      "executable": "",
+      "translations": [
+        {
+          "id": "star-wars-outlaws-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Star Wars Outlaws.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Star_wars_outlaws/ar/v1/starwars.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "9.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "still-wakes-the-deep",
+      "title": "Still Wakes the Deep",
+      "category": "Adventure",
+      "rating": 4.4,
+      "description": "1975. Disaster strikes an offshore rig. Survive a collapsing platform and an otherworldly horror.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1622910/4922a49a07bf4f8eb23c33571e723d69de5dc5fb/header.jpg?t=1776368925",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1622910/4922a49a07bf4f8eb23c33571e723d69de5dc5fb/header.jpg?t=1776368925",
+      "executable": "",
+      "translations": [
+        {
+          "id": "still-wakes-the-deep-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Still Wakes the Deep.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Still_Wakes_the_Deep/ar/v1/Habitat.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "6.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "supernatural",
+      "title": "Supernatural",
+      "category": "Action",
+      "rating": 3.2,
+      "description": "Investigate a chilling disappearance in a haunted house where every shadow hides terror.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2093010/header.jpg?t=1733831221",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2093010/header.jpg?t=1733831221",
+      "executable": "",
+      "translations": [
+        {
+          "id": "supernatural-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Supernatural.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Supernatural/ar/v1/Supernatural.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "4.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-18T22:08:29.999Z"
+  "contentVersion": "2026-04-19T04:48:24.796Z"
 }
