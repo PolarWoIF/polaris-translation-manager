@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-19T04:48:24.796Z",
+  "lastUpdated": "2026-04-19T07:07:23.547Z",
   "categories": [
     "Action",
     "Adventure",
@@ -1252,7 +1252,371 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "avowed",
+      "title": "Avowed",
+      "category": "RPG",
+      "rating": 3.9,
+      "description": "Avowed is a first-person fantasy RPG set in the world of Eora, where your choices carve a path through war, intrigue, and ancient mysteries. Navigate a land in turmoil, forge powerful alliances or deadly rivalries, and wield magic and steel.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2457220/header.jpg?t=1771352530",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2457220/header.jpg?t=1771352530",
+      "executable": "",
+      "translations": [
+        {
+          "id": "avowed-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Avowed.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Avowed/ar/v1/Alabama.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.9 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "chorus-of-carcosa",
+      "title": "Chorus of Carcosa",
+      "category": "Adventure",
+      "rating": 3.9,
+      "description": "Chorus of Carcosa is a first-person psychological horror game about an anxious sculptor who is trapped in a dark and ever-changing building. Stay silent, survive its twisted labyrinths and escape the monsters.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2987750/header.jpg?t=1743606513",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2987750/header.jpg?t=1743606513",
+      "executable": "",
+      "translations": [
+        {
+          "id": "chorus-of-carcosa-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Chorus of Carcosa.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/ChorusOfCarcosa/ar/v1/ChorusOfCarcosa.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "high-on-life",
+      "title": "High On Life",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "Humanity is being threatened by an alien cartel who wants to use them as drugs. Partner with charismatic talking guns and take down Garmantuous and his gang.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1583230/header.jpg?t=1752869049",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1583230/header.jpg?t=1752869049",
+      "executable": "",
+      "translations": [
+        {
+          "id": "high-on-life-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for High On Life.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/High_on_Life/ar/v1/oregon.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "11.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "lies-of-p",
+      "title": "Lies of P",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "Lies of P is a thrilling soulslike that takes the story of Pinocchio, turns it on its head, and sets it against the darkly elegant backdrop of the Belle Epoque era.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1627720/header.jpg?t=1764565054",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1627720/header.jpg?t=1764565054",
+      "executable": "",
+      "translations": [
+        {
+          "id": "lies-of-p-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Lies of P.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/LiesofP/ar/v1/LiesofP.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "life-is-strange-double-exposure",
+      "title": "Life is Strange: Double Exposure",
+      "category": "Action",
+      "rating": 3.4,
+      "description": "When Max Caulfield finds her friend Safi dead in the snow, she tears open the way to a parallel timeline where Safi is still alive. Use Max's new power to solve and prevent the same murder.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1874000/header.jpg?t=1773408764",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1874000/header.jpg?t=1773408764",
+      "executable": "",
+      "translations": [
+        {
+          "id": "life-is-strange-double-exposure-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Life is Strange: Double Exposure.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Life_is_Strange_Double_Exposure/ar/v1/Chronos.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "7.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "mad-max",
+      "title": "Mad Max",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "Play as Mad Max, a reluctant hero and survivor who wants nothing more than to leave the madness behind and find solace.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/234140/header.jpg?t=1773442092",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/234140/header.jpg?t=1773442092",
+      "executable": "",
+      "translations": [
+        {
+          "id": "mad-max-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Mad Max.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/mad_max/ar/v1/dropzone.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "puppet-house",
+      "title": "Puppet House",
+      "category": "Action",
+      "rating": 4.5,
+      "description": "Puppet House is a puzzle-adventure horror with escape room elements. A freak ritual creates a killer puppet, and Detective Rick faces his greatest horror.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1707710/header.jpg?t=1769612970",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1707710/header.jpg?t=1769612970",
+      "executable": "",
+      "translations": [
+        {
+          "id": "puppet-house-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Puppet House.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Puppet_House/ar/v1/PuppetHouse.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "0.4 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "sleeping-dogs-definitive-edition",
+      "title": "Sleeping Dogs: Definitive Edition",
+      "category": "Action",
+      "rating": 4.7,
+      "description": "The critically acclaimed open-world action adventure, rebuilt and remastered with all previously available DLC and visual improvements.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1766070052",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/307690/header.jpg?t=1766070052",
+      "executable": "",
+      "translations": [
+        {
+          "id": "sleeping-dogs-definitive-edition-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Sleeping Dogs: Definitive Edition.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Sleeping_Dogs_Definitive_Edition/ar/v1/Sleeping%20Dogs%20Definitive%20Edition.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "161.1 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "south-of-midnight",
+      "title": "South of Midnight",
+      "category": "Action",
+      "rating": 4.7,
+      "description": "Explore the mythos and confront mysterious creatures of the Deep South in this modern folktale action-adventure from Compulsion Games.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1934570/56f64e713504dd2558077d038eb7470c8689a559/header.jpg?t=1774984440",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1934570/56f64e713504dd2558077d038eb7470c8689a559/header.jpg?t=1774984440",
+      "executable": "",
+      "translations": [
+        {
+          "id": "south-of-midnight-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for South of Midnight.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/SouthofMidnight/ar/v1/Midnight.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "8.5 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-beast-inside",
+      "title": "The Beast Inside",
+      "category": "Action",
+      "rating": 4.1,
+      "description": "A unique, gripping twist on thriller and survival horror. Immerse in long-buried secrets, personal tragedies, and madness.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/792300/header.jpg?t=1669227434",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/792300/header.jpg?t=1669227434",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-beast-inside-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Beast Inside.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/TheBeastInside/ar/v1/TheBeastInside.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "18.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "the-callisto-protocol",
+      "title": "The Callisto Protocol",
+      "category": "Action",
+      "rating": 3.3,
+      "description": "Survive to escape the horrors of Callisto and uncover the dark secrets of Jupiter?s dead moon.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1544020/header.jpg?t=1760331403",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1544020/header.jpg?t=1760331403",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-callisto-protocol-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for The Callisto Protocol.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/TheCallistoProtocol/ar/v1/TheCallistoProtocol.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "7.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "watch-dogs",
+      "title": "Watch_Dogs?",
+      "category": "Action",
+      "rating": 4,
+      "description": "In today's hyper-connected world, Chicago operates under ctOS, the most advanced computer network in America.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/243470/header.jpg?t=1739177057",
+      "executable": "",
+      "translations": [
+        {
+          "id": "watch-dogs-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Watch_Dogs?.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Watch_Dogs/ar/v1/data_win64.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "19.8 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "white-day-2-the-flower-that-tells-lies",
+      "title": "White Day 2: The Flower That Tells Lies - Complete Edition",
+      "category": "Action",
+      "rating": 2.3,
+      "description": "Return to Yeondu High School and uncover the dark truth hidden in this direct sequel to the Korean horror classic.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2078040/header.jpg?t=1741788038",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2078040/header.jpg?t=1741788038",
+      "executable": "",
+      "translations": [
+        {
+          "id": "white-day-2-the-flower-that-tells-lies-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for White Day 2: The Flower That Tells Lies - Complete Edition.",
+          "releaseDate": "2026-04-19",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/White_Day_2_The_Flower_That_Tells_Lies/ar/v1/WD.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "5.0 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-19T04:48:24.796Z"
+  "contentVersion": "2026-04-19T07:07:23.547Z"
 }
