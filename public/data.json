@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-04-19T07:07:23.547Z",
+  "lastUpdated": "2026-04-20T03:58:24.784Z",
   "categories": [
     "Action",
     "Adventure",
@@ -1616,7 +1616,91 @@
           "author": "Polaris Team"
         }
       ]
+    },
+    {
+      "id": "obey-the-voice",
+      "title": "Obey the Voice?",
+      "category": "Adventure",
+      "rating": 4.4,
+      "description": "You are here to listen to The Voice and do what it says. But do not listen to other voices.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919190/70a1fc53e5c8574c5756d1a8b44fc4af49a81f28/header.jpg?t=1770069035",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3919190/70a1fc53e5c8574c5756d1a8b44fc4af49a81f28/header.jpg?t=1770069035",
+      "executable": "",
+      "translations": [
+        {
+          "id": "obey-the-voice-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Obey the Voice?.",
+          "releaseDate": "2026-04-20",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/ObeytheVoice/ar/v1/ObeytheVoice.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "1.8 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "poppy-playtime",
+      "title": "Poppy Playtime",
+      "category": "Action",
+      "rating": 4.4,
+      "description": "Stay alive in this horror-puzzle adventure. Survive the vengeful toys waiting in the abandoned toy factory.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1721470/00ca34a0c863a8d86c6582904249216d6aa263bd/header.jpg?t=1770858202",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1721470/00ca34a0c863a8d86c6582904249216d6aa263bd/header.jpg?t=1770858202",
+      "executable": "",
+      "translations": [
+        {
+          "id": "poppy-playtime-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Poppy Playtime.",
+          "releaseDate": "2026-04-20",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Poppy_Playtime/ar/v1/Poppy%20Playtime%20Collection.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "78.3 MB",
+          "author": "Polaris Team"
+        }
+      ]
+    },
+    {
+      "id": "red-dead-redemption-2",
+      "title": "Red Dead Redemption 2",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "Arthur Morgan and the Van der Linde gang are outlaws on the run. Survive across the rugged American heartland.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/header.jpg?t=1759502961",
+      "executable": "",
+      "translations": [
+        {
+          "id": "red-dead-redemption-2-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Arabic localization package for Red Dead Redemption 2.",
+          "releaseDate": "2026-04-20",
+          "downloadUrl": "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/games/Red_Dead_Redemption_2/ar/v1/RTEA%20v1.3.zip",
+          "changelog": [
+            "Initial Arabic release",
+            "Localized UI and dialogues",
+            "Adjusted text rendering and spacing"
+          ],
+          "size": "3.2 MB",
+          "author": "Polaris Team"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-19T07:07:23.547Z"
+  "contentVersion": "2026-04-20T03:58:24.784Z"
 }

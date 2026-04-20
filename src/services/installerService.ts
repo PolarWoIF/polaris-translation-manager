@@ -390,6 +390,51 @@ function getArchiveExtensionFromUrl(downloadUrl: string): string {
   }
 }
 
+function isExecutableExtension(extension: string): boolean {
+  return extension.trim().toLowerCase() === ".exe";
+}
+
+function isExecutableDownload(download: DownloadResolutionResult): boolean {
+  const extensionHint = normalizeArchiveFormat(download.extensionHint);
+  if (isExecutableExtension(extensionHint)) {
+    return true;
+  }
+
+  const extensionFromUrl = getArchiveExtensionFromUrl(download.url);
+  return isExecutableExtension(extensionFromUrl);
+}
+
+function sanitizeWindowsFileName(value: string): string {
+  return value
+    .replace(/[\\/]+/g, " ")
+    .replace(/[<>:"/\\|?*\x00-\x1f]/g, "_")
+    .replace(/\s+/g, " ")
+    .replace(/\.+$/g, "")
+    .trim();
+}
+
+function getExecutableInstallerFileName(downloadUrl: string, label: string): string {
+  let candidate = "";
+
+  try {
+    const parsedUrl = new URL(downloadUrl);
+    const fromPath = decodeURIComponent(parsedUrl.pathname.split("/").pop() ?? "");
+    candidate = sanitizeWindowsFileName(fromPath);
+  } catch {
+    // Ignore URL parsing errors and fallback to label.
+  }
+
+  if (!candidate) {
+    candidate = sanitizeWindowsFileName(label) || "translation-installer";
+  }
+
+  if (!candidate.toLowerCase().endsWith(".exe")) {
+    candidate = `${candidate}.exe`;
+  }
+
+  return candidate;
+}
+
 function getSevenZipCandidates(runtime: NodeRuntime): string[] {
   const candidates: string[] = [];
   const pushCandidate = (value: string | null | undefined) => {
@@ -477,10 +522,26 @@ const TLOU_GAME_ID = "the-last-of-us-part-i";
 const TLOU_CORE_FILE_NAME = "core.psarc";
 const TLOU_TOOL_FILE_NAME = "TLOU PSARC Tool.exe";
 const TLOU_MAIN_SEGMENTS = ["build", "pc", "main"] as const;
+const AUTO_RUN_TRANSLATION_EXECUTABLE_GAME_IDS = new Set<string>([
+  "red-dead-redemption-2",
+]);
 
 function toInstallRelativePath(targetRoot: string, absolutePath: string, runtime: NodeRuntime): string {
   const relative = runtime.path.relative(targetRoot, absolutePath);
   return relative.replace(/\\/g, "/");
+}
+
+function isExecutableRelativePath(relativePath: string): boolean {
+  return relativePath.trim().toLowerCase().endsWith(".exe");
+}
+
+function shouldAutoRunInstalledExecutable(game: Game): boolean {
+  const gameId = game.id.trim().toLowerCase();
+  if (AUTO_RUN_TRANSLATION_EXECUTABLE_GAME_IDS.has(gameId)) {
+    return true;
+  }
+
+  return game.title.trim().toLowerCase().includes("red dead redemption 2");
 }
 
 async function listFilesRecursively(directory: string, runtime: NodeRuntime): Promise<string[]> {
@@ -570,13 +631,18 @@ async function runExecutable(
   args: string[],
   cwd: string,
   timeoutMs: number,
-  runtime: NodeRuntime
+  runtime: NodeRuntime,
+  options?: {
+    windowsHide?: boolean;
+    stdio?: "pipe" | "ignore" | "inherit";
+  }
 ): Promise<{ code: number | null; stdout: string; stderr: string; timedOut: boolean }> {
   return new Promise((resolve, reject) => {
+    const stdioMode = options?.stdio ?? "pipe";
     const child = runtime.childProcess.spawn(executablePath, args, {
       cwd,
-      windowsHide: true,
-      stdio: ["ignore", "pipe", "pipe"],
+      windowsHide: options?.windowsHide ?? true,
+      stdio: stdioMode === "pipe" ? ["ignore", "pipe", "pipe"] : stdioMode,
     });
 
     let stdout = "";
@@ -1280,6 +1346,174 @@ async function copyDirectoryIntoGame(
   }
 }
 
+async function copyAndRunExecutableInstaller(
+  executableBuffer: Uint8Array,
+  executableDownload: DownloadResolutionResult,
+  partLabel: string,
+  targetRoot: string,
+  runtime: NodeRuntime,
+  onProgress: (state: InstallationState) => void,
+  progressStart: number,
+  progressEnd: number
+): Promise<string> {
+  const executableName = getExecutableInstallerFileName(executableDownload.url, partLabel);
+  const destinationPath = runtime.path.resolve(targetRoot, executableName);
+
+  if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
+    throw new Error(`Blocked unsafe executable installer path: ${executableName}`);
+  }
+
+  onProgress({
+    step: "copying",
+    progress: Math.min(progressStart, 99),
+    message: `Copying ${partLabel} installer to game folder...`,
+  });
+
+  await runtime.fs.writeFile(destinationPath, executableBuffer);
+
+  onProgress({
+    step: "copying",
+    progress: Math.min(Math.max(progressStart + 1, progressEnd - 1), 99),
+    message: `Running ${partLabel} installer (interactive window)...`,
+  });
+
+  const runResult = await runExecutable(destinationPath, [], targetRoot, 45 * 60 * 1000, runtime, {
+    windowsHide: false,
+    stdio: "inherit",
+  });
+  if (runResult.timedOut) {
+    throw new Error(`Timed out while waiting for ${partLabel} installer to finish.`);
+  }
+
+  if (runResult.code !== 0) {
+    const details = `${runResult.stdout}\n${runResult.stderr}`
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .find((line) => line.length > 0);
+    throw new Error(
+      `Executable installer failed for ${partLabel}: exit ${runResult.code ?? "null"}${details ? ` (${details})` : ""}`
+    );
+  }
+
+  onProgress({
+    step: "copying",
+    progress: Math.min(progressEnd, 99),
+    message: `${partLabel} installer finished successfully.`,
+  });
+
+  return toInstallRelativePath(targetRoot, destinationPath, runtime);
+}
+
+async function copyExecutablePayload(
+  executableBuffer: Uint8Array,
+  executableDownload: DownloadResolutionResult,
+  partLabel: string,
+  targetRoot: string,
+  runtime: NodeRuntime,
+  onProgress: (state: InstallationState) => void,
+  progressStart: number,
+  progressEnd: number
+): Promise<string> {
+  const executableName = getExecutableInstallerFileName(executableDownload.url, partLabel);
+  const destinationPath = runtime.path.resolve(targetRoot, executableName);
+
+  if (!isPathInsideTarget(targetRoot, destinationPath, runtime)) {
+    throw new Error(`Blocked unsafe executable payload path: ${executableName}`);
+  }
+
+  onProgress({
+    step: "copying",
+    progress: Math.min(progressStart, 99),
+    message: `Copying ${partLabel} executable into game folder...`,
+  });
+
+  await runtime.fs.writeFile(destinationPath, executableBuffer);
+
+  onProgress({
+    step: "copying",
+    progress: Math.min(progressEnd, 99),
+    message: `${partLabel} executable copied.`,
+  });
+
+  return toInstallRelativePath(targetRoot, destinationPath, runtime);
+}
+
+async function runInstalledExecutableForGame(
+  game: Game,
+  installedFiles: string[],
+  targetRoot: string,
+  runtime: NodeRuntime,
+  onProgress: (state: InstallationState) => void
+) {
+  if (!shouldAutoRunInstalledExecutable(game)) {
+    return;
+  }
+
+  const executableCandidates = Array.from(
+    new Set(installedFiles.filter((relativePath) => isExecutableRelativePath(relativePath)))
+  );
+
+  if (executableCandidates.length === 0) {
+    throw new Error("No translation .exe file was installed, so automatic run could not start.");
+  }
+
+  const preferred = executableCandidates
+    .map((relativePath) => {
+      const normalized = relativePath.toLowerCase();
+      let score = 0;
+      if (normalized.includes("rtea")) score += 6;
+      if (normalized.includes("patch")) score += 5;
+      if (normalized.includes("setup")) score += 4;
+      if (normalized.includes("install")) score += 4;
+      if (normalized.includes("arab")) score += 3;
+      if (normalized.includes("translat")) score += 3;
+      return { relativePath, score };
+    })
+    .sort((a, b) => b.score - a.score || a.relativePath.length - b.relativePath.length);
+
+  const executableRelativePath = preferred[0].relativePath;
+  const executableAbsolutePath = runtime.path.resolve(targetRoot, executableRelativePath);
+  if (!isPathInsideTarget(targetRoot, executableAbsolutePath, runtime)) {
+    throw new Error(`Blocked unsafe executable path: ${executableRelativePath}`);
+  }
+
+  let stats: import("node:fs").Stats;
+  try {
+    stats = await runtime.fs.stat(executableAbsolutePath);
+  } catch {
+    throw new Error(`Expected executable was not found after install: ${executableRelativePath}`);
+  }
+  if (!stats.isFile()) {
+    throw new Error(`Expected executable path is not a file: ${executableRelativePath}`);
+  }
+
+  onProgress({
+    step: "copying",
+    progress: 98,
+    message: `Running translation executable (interactive): ${executableRelativePath}`,
+  });
+
+  const runResult = await runExecutable(executableAbsolutePath, [], targetRoot, 45 * 60 * 1000, runtime, {
+    windowsHide: false,
+    stdio: "inherit",
+  });
+  if (runResult.timedOut) {
+    throw new Error(`Timed out while running translation executable: ${executableRelativePath}`);
+  }
+
+  if (runResult.code !== 0) {
+    const details = `${runResult.stdout}\n${runResult.stderr}`
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .find((line) => line.length > 0);
+    throw new Error(
+      `Translation executable failed (${executableRelativePath}) with exit code ${runResult.code ?? "null"}${
+        details ? `: ${details}` : ""
+      }`
+    );
+  }
+}
+
 async function installTheLastOfUsPartI(
   game: Game,
   translation: Translation,
@@ -1484,6 +1718,7 @@ export const installerService = {
       }
 
       const installedFiles: string[] = [];
+      let executedTranslationExecutable = false;
       // 2. Resolve one or more patch archives.
       onProgress({ step: "downloading", progress: 10, message: "Authorizing patch download..." });
       const archiveDownloads = await resolveTranslationDownloads(game, translation, runtime);
@@ -1513,6 +1748,37 @@ export const installerService = {
         });
 
         const archiveBuffer = await downloadArchive(archiveDownload.url, runtime);
+
+        if (isExecutableDownload(archiveDownload)) {
+          if (shouldAutoRunInstalledExecutable(game)) {
+            const installerRelativePath = await copyAndRunExecutableInstaller(
+              archiveBuffer,
+              archiveDownload,
+              partLabel,
+              targetRoot,
+              runtime,
+              onProgress,
+              extractionStart,
+              copyEnd
+            );
+            installedFiles.push(installerRelativePath);
+            executedTranslationExecutable = true;
+          } else {
+            const executableRelativePath = await copyExecutablePayload(
+              archiveBuffer,
+              archiveDownload,
+              partLabel,
+              targetRoot,
+              runtime,
+              onProgress,
+              extractionStart,
+              copyEnd
+            );
+            installedFiles.push(executableRelativePath);
+          }
+          continue;
+        }
+
         const extractionResult = await extractArchiveToTempDirectory(
           archiveBuffer,
           archiveDownload.extensionHint || archiveDownload.url,
@@ -1555,6 +1821,10 @@ export const installerService = {
             // Best-effort cleanup for temporary extraction files.
           }
         }
+      }
+
+      if (!executedTranslationExecutable) {
+        await runInstalledExecutableForGame(game, installedFiles, targetRoot, runtime, onProgress);
       }
 
       onProgress({
