@@ -2,7 +2,7 @@
   "name": "polar-translation",
   "productName": "Polar Translation",
   "private": false,
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "main": "electron.cjs",
   "scripts": {

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 const DEFAULT_REMOTE_JSON_URL =
-  "https://pub-bffc58c40ead4c63a2c4a971e09daf07.r2.dev/translations.json";
+  "https://polar-download-gateway.mdmrksad1ksa.workers.dev/api/content";
 
 function assertRemotePayloadUsable(payload) {
   if (!payload || typeof payload !== "object") {

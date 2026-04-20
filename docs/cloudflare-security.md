@@ -8,6 +8,7 @@
 ## Recommended Architecture
 - Make patch R2 bucket private.
 - Use Cloudflare Worker as download gateway:
+  - `GET /api/content` returns secure library JSON (assetKey-based, no direct file URLs).
   - `POST /api/download/authorize` to validate game/translation request.
   - Return short-lived signed URL/token.
   - `GET /api/download/file?token=...` streams the file.
@@ -22,9 +23,12 @@
 2. Set secret:
    - `DOWNLOAD_SIGNING_SECRET`
 3. Configure manifest source:
-   - `DOWNLOAD_MANIFEST_JSON` (inline), or
-   - `DOWNLOAD_MANIFEST_URL` (remote JSON).
-4. Optional rate limit binding:
+  - `DOWNLOAD_MANIFEST_JSON` (inline), or
+  - `DOWNLOAD_MANIFEST_URL` (remote JSON).
+  - Recommended: `DOWNLOAD_MANIFEST_OBJECT_KEY` to read manifest from private R2 bucket.
+4. Configure content source key:
+  - `CONTENT_INDEX_KEY` (default `secure-translations.json`)
+5. Optional rate limit binding:
    - KV namespace `RATE_LIMIT_KV`
    - `RATE_LIMIT_MAX_PER_MINUTE` (default `40`)
    - `TOKEN_TTL_SECONDS` (default `120`)

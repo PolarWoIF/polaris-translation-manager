@@ -148,7 +148,14 @@
     {
       "gameId": "firewatch",
       "translationId": "firewatch-ar-v1",
-      "assetKey": "games/Firewatch/ar/v1/Firewatch_Data.7z"
+      "assetKey": "games/Firewatch/ar/v1/firewatchpart1.zip",
+      "partId": "part-1"
+    },
+    {
+      "gameId": "firewatch",
+      "translationId": "firewatch-ar-v1",
+      "assetKey": "games/Firewatch/ar/v1/firewatchpart2.zip",
+      "partId": "part-2"
     },
     {
       "gameId": "mouthwashing",
@@ -179,6 +186,126 @@
       "gameId": "fallout-4",
       "translationId": "fallout-4-ar-v1",
       "assetKey": "games/fallout_4/ar/v1/strings.zip"
+    },
+    {
+      "gameId": "dollmare",
+      "translationId": "dollmare-ar-v1",
+      "assetKey": "games/Dollmare/ar/v1/ToyFactory.zip"
+    },
+    {
+      "gameId": "enotria-the-last-song",
+      "translationId": "enotria-the-last-song-ar-v1",
+      "assetKey": "games/Enotria_The_Last_Song/ar/v1/Enotria.zip"
+    },
+    {
+      "gameId": "fobia-st-dinfna-hotel",
+      "translationId": "fobia-st-dinfna-hotel-ar-v1",
+      "assetKey": "games/Fobia_St_Dinfna_Hotel/ar/v1/Fobia.zip"
+    },
+    {
+      "gameId": "palworld",
+      "translationId": "palworld-ar-v1",
+      "assetKey": "games/Palworld/ar/v1/Pal.zip"
+    },
+    {
+      "gameId": "retrace-the-light",
+      "translationId": "retrace-the-light-ar-v1",
+      "assetKey": "games/RetraceTheLight/ar/v1/RetraceTheLight.zip"
+    },
+    {
+      "gameId": "star-wars-outlaws",
+      "translationId": "star-wars-outlaws-ar-v1",
+      "assetKey": "games/Star_wars_outlaws/ar/v1/starwars.zip"
+    },
+    {
+      "gameId": "still-wakes-the-deep",
+      "translationId": "still-wakes-the-deep-ar-v1",
+      "assetKey": "games/Still_Wakes_the_Deep/ar/v1/Habitat.zip"
+    },
+    {
+      "gameId": "supernatural",
+      "translationId": "supernatural-ar-v1",
+      "assetKey": "games/Supernatural/ar/v1/Supernatural.zip"
+    },
+    {
+      "gameId": "avowed",
+      "translationId": "avowed-ar-v1",
+      "assetKey": "games/Avowed/ar/v1/Alabama.zip"
+    },
+    {
+      "gameId": "chorus-of-carcosa",
+      "translationId": "chorus-of-carcosa-ar-v1",
+      "assetKey": "games/ChorusOfCarcosa/ar/v1/ChorusOfCarcosa.zip"
+    },
+    {
+      "gameId": "high-on-life",
+      "translationId": "high-on-life-ar-v1",
+      "assetKey": "games/High_on_Life/ar/v1/oregon.zip"
+    },
+    {
+      "gameId": "lies-of-p",
+      "translationId": "lies-of-p-ar-v1",
+      "assetKey": "games/LiesofP/ar/v1/LiesofP.zip"
+    },
+    {
+      "gameId": "life-is-strange-double-exposure",
+      "translationId": "life-is-strange-double-exposure-ar-v1",
+      "assetKey": "games/Life_is_Strange_Double_Exposure/ar/v1/Chronos.zip"
+    },
+    {
+      "gameId": "mad-max",
+      "translationId": "mad-max-ar-v1",
+      "assetKey": "games/mad_max/ar/v1/dropzone.zip"
+    },
+    {
+      "gameId": "puppet-house",
+      "translationId": "puppet-house-ar-v1",
+      "assetKey": "games/Puppet_House/ar/v1/PuppetHouse.zip"
+    },
+    {
+      "gameId": "sleeping-dogs-definitive-edition",
+      "translationId": "sleeping-dogs-definitive-edition-ar-v1",
+      "assetKey": "games/Sleeping_Dogs_Definitive_Edition/ar/v1/Sleeping Dogs Definitive Edition.zip"
+    },
+    {
+      "gameId": "south-of-midnight",
+      "translationId": "south-of-midnight-ar-v1",
+      "assetKey": "games/SouthofMidnight/ar/v1/Midnight.zip"
+    },
+    {
+      "gameId": "the-beast-inside",
+      "translationId": "the-beast-inside-ar-v1",
+      "assetKey": "games/TheBeastInside/ar/v1/TheBeastInside.zip"
+    },
+    {
+      "gameId": "the-callisto-protocol",
+      "translationId": "the-callisto-protocol-ar-v1",
+      "assetKey": "games/TheCallistoProtocol/ar/v1/TheCallistoProtocol.zip"
+    },
+    {
+      "gameId": "watch-dogs",
+      "translationId": "watch-dogs-ar-v1",
+      "assetKey": "games/Watch_Dogs/ar/v1/data_win64.zip"
+    },
+    {
+      "gameId": "white-day-2-the-flower-that-tells-lies",
+      "translationId": "white-day-2-the-flower-that-tells-lies-ar-v1",
+      "assetKey": "games/White_Day_2_The_Flower_That_Tells_Lies/ar/v1/WD.zip"
+    },
+    {
+      "gameId": "obey-the-voice",
+      "translationId": "obey-the-voice-ar-v1",
+      "assetKey": "games/ObeytheVoice/ar/v1/ObeytheVoice.zip"
+    },
+    {
+      "gameId": "poppy-playtime",
+      "translationId": "poppy-playtime-ar-v1",
+      "assetKey": "games/Poppy_Playtime/ar/v1/Poppy Playtime Collection.zip"
+    },
+    {
+      "gameId": "red-dead-redemption-2",
+      "translationId": "red-dead-redemption-2-ar-v1",
+      "assetKey": "games/Red_Dead_Redemption_2/ar/v1/RTEA v1.3.zip"
     }
   ]
 }

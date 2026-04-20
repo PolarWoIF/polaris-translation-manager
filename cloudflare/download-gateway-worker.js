@@ -2,6 +2,7 @@
  * Polar Translation - Cloudflare Download Gateway Worker
  *
  * Purpose:
+ * - Serve secure app content index (`/api/content`) from private R2.
  * - Keep R2 patch bucket private.
  * - Issue short-lived signed download links.
  * - Stream files only for validated game/translation requests.
@@ -15,6 +16,8 @@
  * - RATE_LIMIT_KV (KV binding for rate limiting state)
  * - RATE_LIMIT_MAX_PER_MINUTE (number, default 40)
  * - TOKEN_TTL_SECONDS (number, default 120)
+ * - CONTENT_INDEX_KEY (object key in PRIVATE_PATCH_BUCKET, default "secure-translations.json")
+ * - DOWNLOAD_MANIFEST_OBJECT_KEY (object key in PRIVATE_PATCH_BUCKET)
  * - DOWNLOAD_MANIFEST_JSON (JSON string)
  * - DOWNLOAD_MANIFEST_URL (URL that returns JSON manifest)
  *
@@ -30,6 +33,7 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const AUTH_PATH = "/api/download/authorize";
 const FILE_PATH = "/api/download/file";
+const CONTENT_PATH = "/api/content";
 
 export default {
   async fetch(request, env, ctx) {
@@ -41,6 +45,10 @@ export default {
 
     if (url.pathname === FILE_PATH && request.method === "GET") {
       return handleFile(request, env);
+    }
+
+    if (url.pathname === CONTENT_PATH && request.method === "GET") {
+      return handleContent(env);
     }
 
     return json(
@@ -111,6 +119,39 @@ async function handleAuthorize(request, env, ctx) {
     },
     200
   );
+}
+
+async function handleContent(env) {
+  if (!env.PRIVATE_PATCH_BUCKET) {
+    return json({ ok: false, error: "Private patch bucket binding is missing." }, 500);
+  }
+
+  const contentKey =
+    typeof env.CONTENT_INDEX_KEY === "string" && env.CONTENT_INDEX_KEY.trim()
+      ? env.CONTENT_INDEX_KEY.trim()
+      : "secure-translations.json";
+
+  const object = await env.PRIVATE_PATCH_BUCKET.get(contentKey);
+  if (!object) {
+    return json({ ok: false, error: "Content index file not found." }, 404);
+  }
+
+  const payload = await object.text();
+  let parsed;
+  try {
+    parsed = safeParseJson(payload);
+  } catch {
+    return json({ ok: false, error: "Content index is not valid JSON." }, 500);
+  }
+
+  return new Response(JSON.stringify(parsed), {
+    status: 200,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "public, max-age=30",
+      "x-content-type-options": "nosniff",
+    },
+  });
 }
 
 async function handleFile(request, env) {
@@ -194,6 +235,20 @@ async function enforceRateLimit(clientIp, env, ctx) {
 }
 
 async function loadManifest(env) {
+  if (env.DOWNLOAD_MANIFEST_OBJECT_KEY) {
+    if (!env.PRIVATE_PATCH_BUCKET) {
+      throw new Error("PRIVATE_PATCH_BUCKET binding is required for object-key manifest source.");
+    }
+
+    const key = String(env.DOWNLOAD_MANIFEST_OBJECT_KEY).trim();
+    const object = await env.PRIVATE_PATCH_BUCKET.get(key);
+    if (!object) {
+      throw new Error(`Manifest object not found: ${key}`);
+    }
+    const raw = await object.text();
+    return safeParseJson(raw);
+  }
+
   if (env.DOWNLOAD_MANIFEST_JSON) {
     return safeParseJson(env.DOWNLOAD_MANIFEST_JSON);
   }

@@ -10,8 +10,9 @@ export default defineConfig(({ mode }) => {
   const remoteContentUrl = env.VITE_REMOTE_JSON_URL ?? "";
   const remoteAppReleaseUrl = env.VITE_REMOTE_APP_RELEASE_URL ?? "";
   const githubReleasesApiUrl = env.VITE_GITHUB_RELEASES_API_URL ?? "";
-  const downloadGatewayUrl = env.VITE_DOWNLOAD_GATEWAY_URL ?? "";
-  const downloadGatewayStrict = env.VITE_DOWNLOAD_GATEWAY_STRICT === "true";
+  const downloadGatewayUrl =
+    env.VITE_DOWNLOAD_GATEWAY_URL ?? "https://polar-download-gateway.mdmrksad1ksa.workers.dev";
+  const downloadGatewayStrict = (env.VITE_DOWNLOAD_GATEWAY_STRICT ?? "true") === "true";
 
   return {
     plugins: [react(), tailwindcss()],
