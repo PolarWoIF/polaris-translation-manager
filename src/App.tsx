@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "motion/react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -14,6 +14,7 @@ import { desktopUpdaterService, DesktopUpdaterState } from "./services/desktopUp
 import { APP_VERSION } from "./constants";
 
 const GAMES_PER_PAGE = 15;
+const CONTENT_AUTO_REFRESH_INTERVAL_MS = 90 * 1000;
 
 export default function App() {
   const [data, setData] = useState<AppData | null>(null);
@@ -29,6 +30,9 @@ export default function App() {
   const [selectedGenre, setSelectedGenre] = useState("All");
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const isBackgroundSyncRunningRef = useRef(false);
+  const latestContentVersionRef = useRef("");
+  const latestGameCountRef = useRef(0);
 
   const loadContent = useCallback(async (forceRemote = false) => {
     if (forceRemote) {
@@ -63,10 +67,71 @@ export default function App() {
     }
   }, []);
 
+  const refreshContentInBackground = useCallback(async () => {
+    if (isBackgroundSyncRunningRef.current) return;
+    isBackgroundSyncRunningRef.current = true;
+
+    try {
+      const result = await dataService.refreshData();
+      const hasVersionChanged = result.contentVersion !== latestContentVersionRef.current;
+      const hasGameCountChanged = result.data.games.length !== latestGameCountRef.current;
+
+      if (!hasVersionChanged && !hasGameCountChanged) {
+        return;
+      }
+
+      setData(result.data);
+      setContentState(result);
+      setContentLoadError(null);
+      if (result.warning) {
+        console.warn(`[Content] ${result.warning}`);
+      } else {
+        console.info(
+          `[Content] Auto-refresh applied. Version: ${result.contentVersion} | Games: ${result.data.games.length}`
+        );
+      }
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : String(error);
+      console.warn(`[Content] Background refresh skipped (${reason}).`);
+    } finally {
+      isBackgroundSyncRunningRef.current = false;
+    }
+  }, []);
+
   useEffect(() => {
     void loadContent(false);
     void checkAppUpdates();
   }, [checkAppUpdates, loadContent]);
+
+  useEffect(() => {
+    latestContentVersionRef.current = contentState?.contentVersion ?? "";
+    latestGameCountRef.current = data?.games.length ?? 0;
+  }, [contentState?.contentVersion, data?.games.length]);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      void refreshContentInBackground();
+    }, CONTENT_AUTO_REFRESH_INTERVAL_MS);
+
+    const handleWindowFocus = () => {
+      void refreshContentInBackground();
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void refreshContentInBackground();
+      }
+    };
+
+    window.addEventListener("focus", handleWindowFocus);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.removeEventListener("focus", handleWindowFocus);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [refreshContentInBackground]);
 
   useEffect(() => {
     const unsubscribe = desktopUpdaterService.subscribe((state) => {

@@ -53,7 +53,7 @@
     {
       "gameId": "ori-and-the-will-of-the-wisps",
       "translationId": "ori-and-the-will-of-the-wisps-ar-v1",
-      "assetKey": "games/Ori_and_the_Will_of_the_Wisps/ar/v1/oriDE_Data.zip"
+      "assetKey": "games/Ori_and_the_Will_of_the_Wisps/ar/v1/oriwotw_Data.zip"
     },
     {
       "gameId": "outlast-1",
@@ -306,6 +306,143 @@
       "gameId": "red-dead-redemption-2",
       "translationId": "red-dead-redemption-2-ar-v1",
       "assetKey": "games/Red_Dead_Redemption_2/ar/v1/RTEA v1.3.zip"
+    },
+    {
+      "gameId": "alan-wake",
+      "translationId": "alan-wake-ar-v1",
+      "assetKey": "games/Alan_Wake/ar/v1/data.zip"
+    },
+    {
+      "gameId": "bioshock-remastered",
+      "translationId": "bioshock-remastered-ar-v1",
+      "assetKey": "games/BioShock_Remastered/ar/v1/ContentBaked.zip"
+    },
+    {
+      "gameId": "choo-choo-charles",
+      "translationId": "choo-choo-charles-ar-v1",
+      "assetKey": "games/Choo_Choo_Charles/ar/v1/Obscure.zip"
+    },
+    {
+      "gameId": "dark-souls-ii-scholar-of-the-first-sin",
+      "translationId": "dark-souls-ii-scholar-of-the-first-sin-ar-v1",
+      "assetKey": "games/DARK_SOULS_II_Scholar_of_the_First_Sin/ar/v1/darksoul2.zip"
+    },
+    {
+      "gameId": "dark-souls-iii",
+      "translationId": "dark-souls-iii-ar-v1",
+      "assetKey": "games/DARK_SOULS_III/ar/v1/darksouls3.zip"
+    },
+    {
+      "gameId": "dark-souls-remastered",
+      "translationId": "dark-souls-remastered-ar-v1",
+      "assetKey": "games/DARK_SOULS_REMASTERED/ar/v1/Dark Souls Remastered ETRD.zip"
+    },
+    {
+      "gameId": "devil-may-cry-4-special-edition",
+      "translationId": "devil-may-cry-4-special-edition-ar-v1",
+      "assetKey": "games/Devil_May_Cry_4_Special_Edition/ar/v1/DMC4SE.zip"
+    },
+    {
+      "gameId": "dredge",
+      "translationId": "dredge-ar-v1",
+      "assetKey": "games/DREDGE/ar/v1/DREDGE_Data.zip"
+    },
+    {
+      "gameId": "fears-to-fathom-woodbury-getaway",
+      "translationId": "fears-to-fathom-woodbury-getaway-ar-v1",
+      "assetKey": "games/Fears_to_Fathom _Woodbury_Getaway/ar/v1/fer1.zip",
+      "partId": "part-1"
+    },
+    {
+      "gameId": "fears-to-fathom-woodbury-getaway",
+      "translationId": "fears-to-fathom-woodbury-getaway-ar-v1",
+      "assetKey": "games/Fears_to_Fathom _Woodbury_Getaway/ar/v1/fer2.zip",
+      "partId": "part-2"
+    },
+    {
+      "gameId": "fears-to-fathom-carson-house",
+      "translationId": "fears-to-fathom-carson-house-ar-v1",
+      "assetKey": "games/Fears_to_Fathom_Carson_House/ar/v1/Fears To Fathom - Carson House_Data.zip"
+    },
+    {
+      "gameId": "fears-to-fathom-ironbark-lookout",
+      "translationId": "fears-to-fathom-ironbark-lookout-ar-v1",
+      "assetKey": "games/Fears_to_Fathom_Ironbark_Lookout/ar/v1/Fears to Fathom - Ironbark Lookout_Data.zip"
+    },
+    {
+      "gameId": "fears-to-fathom-norwood-hitchhike",
+      "translationId": "fears-to-fathom-norwood-hitchhike-ar-v1",
+      "assetKey": "games/Fears_To_Fathom_Norwood_Hitchhike/ar/v1/Fears To Fathom - Norwood Hitchhike_Data.zip"
+    },
+    {
+      "gameId": "five-nights-at-freddys-secret-of-the-mimic",
+      "translationId": "five-nights-at-freddys-secret-of-the-mimic-ar-v1",
+      "assetKey": "games/Five_Nights_at_Freddy’s_Secret_of_the_Mimic/ar/v1/FNAF_SOTM.zip"
+    },
+    {
+      "gameId": "hades",
+      "translationId": "hades-ar-v1",
+      "assetKey": "games/Hades/ar/v1/Content.zip"
+    },
+    {
+      "gameId": "hades-ii",
+      "translationId": "hades-ii-ar-v1",
+      "assetKey": "games/Hades_II/ar/v1/Content.zip"
+    },
+    {
+      "gameId": "hello-neighbor-2",
+      "translationId": "hello-neighbor-2-ar-v1",
+      "assetKey": "games/Hello_Neighbor_2/ar/v1/HelloNeighbor2.zip"
+    },
+    {
+      "gameId": "indika",
+      "translationId": "indika-ar-v1",
+      "assetKey": "games/Indika/ar/v1/Indika.zip"
+    },
+    {
+      "gameId": "luto",
+      "translationId": "luto-ar-v1",
+      "assetKey": "games/Luto/ar/v1/Luto.zip"
+    },
+    {
+      "gameId": "metal-gear-solid-delta-snake-eater",
+      "translationId": "metal-gear-solid-delta-snake-eater-ar-v1",
+      "assetKey": "games/METAL_GEAR_SOLID_Δ_SNAKE_EATER/ar/v1/MGSDelta.zip"
+    },
+    {
+      "gameId": "middle-earth-shadow-of-mordor",
+      "translationId": "middle-earth-shadow-of-mordor-ar-v1",
+      "assetKey": "games/Middle_earth_Shadow_of_Mordor/ar/v1/ShadowOfMordor.zip"
+    },
+    {
+      "gameId": "phoenix-wright-ace-attorney-trilogy",
+      "translationId": "phoenix-wright-ace-attorney-trilogy-ar-v1",
+      "assetKey": "games/Phoenix_Wright_Ace_Attorney_Trilogy/ar/v1/PWAAT_Data.zip"
+    },
+    {
+      "gameId": "rv-there-yet",
+      "translationId": "rv-there-yet-ar-v1",
+      "assetKey": "games/RVThereYet/ar/v1/Ride.zip"
+    },
+    {
+      "gameId": "samson",
+      "translationId": "samson-ar-v1",
+      "assetKey": "games/samson/ar/v1/CJ.zip"
+    },
+    {
+      "gameId": "shinobi-art-of-vengeance",
+      "translationId": "shinobi-art-of-vengeance-ar-v1",
+      "assetKey": "games/SHINOBIArtofVengeance/ar/v1/SHINOBI_AOV_Data.zip"
+    },
+    {
+      "gameId": "the-evil-within",
+      "translationId": "the-evil-within-ar-v1",
+      "assetKey": "games/The_Evil_Within/ar/v1/base.zip"
+    },
+    {
+      "gameId": "uncharted-legacy-of-thieves-collection",
+      "translationId": "uncharted-legacy-of-thieves-collection-ar-v1",
+      "assetKey": "games/UNCHARTED_Legacy_of_Thieves_Collection/ar/v1/Uncharted4_data.zip"
     }
   ]
 }

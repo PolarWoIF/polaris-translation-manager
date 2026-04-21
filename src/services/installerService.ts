@@ -86,6 +86,12 @@ interface DownloadRequestTarget {
   archiveFormat?: string;
 }
 
+interface OrderedDownloadPart {
+  part: TranslationDownloadPart;
+  index: number;
+  sequence: number;
+}
+
 interface DownloadAuthorizationResponse {
   downloadUrl?: string;
   url?: string;
@@ -285,9 +291,17 @@ async function resolveTranslationDownloads(
 ): Promise<DownloadResolutionResult[]> {
   const parts = Array.isArray(translation.downloadParts) ? translation.downloadParts : [];
 
+  const orderedParts: OrderedDownloadPart[] = parts
+    .map((part, index) => ({
+      part,
+      index,
+      sequence: inferPartSequence(part, index),
+    }))
+    .sort((a, b) => a.sequence - b.sequence || a.index - b.index);
+
   const targets: DownloadRequestTarget[] =
-    parts.length > 0
-      ? parts.map((part: TranslationDownloadPart, index) => ({
+    orderedParts.length > 0
+      ? orderedParts.map(({ part }: OrderedDownloadPart, index) => ({
           label:
             (part.name ?? "").trim() ||
             (part.id ?? "").trim() ||
@@ -311,6 +325,32 @@ async function resolveTranslationDownloads(
     resolved.push(item);
   }
   return resolved;
+}
+
+function inferPartSequence(part: TranslationDownloadPart, fallbackIndex: number): number {
+  const candidates = [part.id, part.name, part.assetKey, part.downloadUrl];
+  for (const candidate of candidates) {
+    const value = (candidate ?? "").trim();
+    if (!value) continue;
+
+    const partMatch = value.match(/(?:^|[^a-z0-9])part[\s\-_]*0*(\d+)(?:[^a-z0-9]|$)/i);
+    if (partMatch?.[1]) {
+      const parsed = Number(partMatch[1]);
+      if (Number.isFinite(parsed) && parsed > 0) {
+        return parsed;
+      }
+    }
+
+    const suffixMatch = value.match(/(?:^|[\s\-_])0*(\d+)(?:\.[a-z0-9]{2,8})?$/i);
+    if (suffixMatch?.[1]) {
+      const parsed = Number(suffixMatch[1]);
+      if (Number.isFinite(parsed) && parsed > 0) {
+        return parsed;
+      }
+    }
+  }
+
+  return fallbackIndex + 1;
 }
 
 function downloadArchive(url: string, runtime: NodeRuntime): Promise<Uint8Array> {
@@ -522,10 +562,6 @@ const TLOU_GAME_ID = "the-last-of-us-part-i";
 const TLOU_CORE_FILE_NAME = "core.psarc";
 const TLOU_TOOL_FILE_NAME = "TLOU PSARC Tool.exe";
 const TLOU_MAIN_SEGMENTS = ["build", "pc", "main"] as const;
-const AUTO_RUN_TRANSLATION_EXECUTABLE_GAME_IDS = new Set<string>([
-  "red-dead-redemption-2",
-]);
-
 function toInstallRelativePath(targetRoot: string, absolutePath: string, runtime: NodeRuntime): string {
   const relative = runtime.path.relative(targetRoot, absolutePath);
   return relative.replace(/\\/g, "/");
@@ -533,15 +569,6 @@ function toInstallRelativePath(targetRoot: string, absolutePath: string, runtime
 
 function isExecutableRelativePath(relativePath: string): boolean {
   return relativePath.trim().toLowerCase().endsWith(".exe");
-}
-
-function shouldAutoRunInstalledExecutable(game: Game): boolean {
-  const gameId = game.id.trim().toLowerCase();
-  if (AUTO_RUN_TRANSLATION_EXECUTABLE_GAME_IDS.has(gameId)) {
-    return true;
-  }
-
-  return game.title.trim().toLowerCase().includes("red dead redemption 2");
 }
 
 async function listFilesRecursively(directory: string, runtime: NodeRuntime): Promise<string[]> {
@@ -1439,16 +1466,11 @@ async function copyExecutablePayload(
 }
 
 async function runInstalledExecutableForGame(
-  game: Game,
   installedFiles: string[],
   targetRoot: string,
   runtime: NodeRuntime,
   onProgress: (state: InstallationState) => void
 ) {
-  if (!shouldAutoRunInstalledExecutable(game)) {
-    return;
-  }
-
   const executableCandidates = Array.from(
     new Set(installedFiles.filter((relativePath) => isExecutableRelativePath(relativePath)))
   );
@@ -1750,32 +1772,18 @@ export const installerService = {
         const archiveBuffer = await downloadArchive(archiveDownload.url, runtime);
 
         if (isExecutableDownload(archiveDownload)) {
-          if (shouldAutoRunInstalledExecutable(game)) {
-            const installerRelativePath = await copyAndRunExecutableInstaller(
-              archiveBuffer,
-              archiveDownload,
-              partLabel,
-              targetRoot,
-              runtime,
-              onProgress,
-              extractionStart,
-              copyEnd
-            );
-            installedFiles.push(installerRelativePath);
-            executedTranslationExecutable = true;
-          } else {
-            const executableRelativePath = await copyExecutablePayload(
-              archiveBuffer,
-              archiveDownload,
-              partLabel,
-              targetRoot,
-              runtime,
-              onProgress,
-              extractionStart,
-              copyEnd
-            );
-            installedFiles.push(executableRelativePath);
-          }
+          const installerRelativePath = await copyAndRunExecutableInstaller(
+            archiveBuffer,
+            archiveDownload,
+            partLabel,
+            targetRoot,
+            runtime,
+            onProgress,
+            extractionStart,
+            copyEnd
+          );
+          installedFiles.push(installerRelativePath);
+          executedTranslationExecutable = true;
           continue;
         }
 
@@ -1823,8 +1831,8 @@ export const installerService = {
         }
       }
 
-      if (!executedTranslationExecutable) {
-        await runInstalledExecutableForGame(game, installedFiles, targetRoot, runtime, onProgress);
+      if (!executedTranslationExecutable && installedFiles.some((relativePath) => isExecutableRelativePath(relativePath))) {
+        await runInstalledExecutableForGame(installedFiles, targetRoot, runtime, onProgress);
       }
 
       onProgress({

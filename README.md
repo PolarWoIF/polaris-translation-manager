@@ -5,7 +5,7 @@ Production-ready Electron desktop app for managing Arabic game translation patch
 ## Stack
 - `Electron` desktop shell
 - `React + Vite + TypeScript` renderer
-- `JSZip` patch extraction
+- `JSZip` + `7z` extraction fallback, plus direct `exe` installer support
 - `Cloudflare R2` remote content source
 - `electron-updater` for app self-updates from GitHub Releases
 
@@ -48,6 +48,7 @@ Behavior:
 - If unavailable/invalid, use cached content
 - If cache missing, use bundled `public/data.json`
 - Startup refresh checks remote content every launch
+- While app is open, background auto-refresh checks Cloudflare periodically and when window regains focus
 - Manual refresh button re-checks Cloudflare on demand
 
 ### Secure Download Gateway (Recommended)
@@ -136,7 +137,9 @@ Only `The Last of Us Part I` uses custom installer behavior:
 - copies `fonts` + `text2`
 - removes `core.psarc`
 
-All other games use the normal ZIP patch install flow.
+All other games use the data-driven installer flow:
+- archive patches (`zip`/`7z`/etc.) are extracted then copied
+- `exe` patches are copied into game root and launched automatically
 
 ## GitHub Release Publishing
 1. Update version:
