@@ -675,9 +675,13 @@ async function runExecutable(
         `$argsList=${
           args.length > 0 ? `@(${args.map((arg) => escapePowerShellString(arg)).join(",")})` : "@()"
         }`,
-        "$process=Start-Process -FilePath $filePath -ArgumentList $argsList -WorkingDirectory $workingDirectory -Verb RunAs -PassThru -Wait",
-        "if ($null -eq $process) { exit 1 }",
-        "exit $process.ExitCode",
+        "try {",
+        "  Start-Process -FilePath $filePath -ArgumentList $argsList -WorkingDirectory $workingDirectory -Verb RunAs -Wait",
+        "  exit 0",
+        "} catch {",
+        "  Write-Error $_.Exception.Message",
+        "  exit 1",
+        "}",
       ].join("; ")
     : "";
 
