@@ -662,11 +662,33 @@ async function runExecutable(
   options?: {
     windowsHide?: boolean;
     stdio?: "pipe" | "ignore" | "inherit";
+    runAsAdmin?: boolean;
   }
 ): Promise<{ code: number | null; stdout: string; stderr: string; timedOut: boolean }> {
+  const shouldRunAsAdmin = Boolean(options?.runAsAdmin) && process.platform === "win32";
+  const escapePowerShellString = (value: string) => `'${value.replace(/'/g, "''")}'`;
+  const startAsAdminCommand = shouldRunAsAdmin
+    ? [
+        "$ErrorActionPreference='Stop'",
+        `$filePath=${escapePowerShellString(executablePath)}`,
+        `$workingDirectory=${escapePowerShellString(cwd)}`,
+        `$argsList=${
+          args.length > 0 ? `@(${args.map((arg) => escapePowerShellString(arg)).join(",")})` : "@()"
+        }`,
+        "$process=Start-Process -FilePath $filePath -ArgumentList $argsList -WorkingDirectory $workingDirectory -Verb RunAs -PassThru -Wait",
+        "if ($null -eq $process) { exit 1 }",
+        "exit $process.ExitCode",
+      ].join("; ")
+    : "";
+
+  const command = shouldRunAsAdmin ? "powershell.exe" : executablePath;
+  const commandArgs = shouldRunAsAdmin
+    ? ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", startAsAdminCommand]
+    : args;
+
   return new Promise((resolve, reject) => {
     const stdioMode = options?.stdio ?? "pipe";
-    const child = runtime.childProcess.spawn(executablePath, args, {
+    const child = runtime.childProcess.spawn(command, commandArgs, {
       cwd,
       windowsHide: options?.windowsHide ?? true,
       stdio: stdioMode === "pipe" ? ["ignore", "pipe", "pipe"] : stdioMode,
@@ -1407,6 +1429,7 @@ async function copyAndRunExecutableInstaller(
   const runResult = await runExecutable(destinationPath, [], targetRoot, 45 * 60 * 1000, runtime, {
     windowsHide: false,
     stdio: "inherit",
+    runAsAdmin: true,
   });
   if (runResult.timedOut) {
     throw new Error(`Timed out while waiting for ${partLabel} installer to finish.`);
@@ -1528,6 +1551,7 @@ async function runInstalledExecutableForGame(
   const runResult = await runExecutable(executableAbsolutePath, [], targetRoot, 45 * 60 * 1000, runtime, {
     windowsHide: false,
     stdio: "inherit",
+    runAsAdmin: true,
   });
   if (runResult.timedOut) {
     throw new Error(`Timed out while running translation executable: ${executableRelativePath}`);
