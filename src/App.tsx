@@ -295,6 +295,38 @@ export default function App() {
     });
   };
 
+  const handleLaunchGame = async (gameId: string) => {
+    const game = data?.games.find((g) => g.id === gameId);
+    if (!game) return;
+
+    const status = getGameStatus(gameId);
+    if (!status.installPath) {
+      updateGameStatus(gameId, {
+        status: "error",
+        statusText: "No installation path selected",
+        error: "No installation path selected",
+      });
+      return;
+    }
+
+    try {
+      const launchedPath = await installerService.launchGame(game, status.installPath, status.installedFiles);
+      const launchedName = launchedPath.split(/[\\/]/).pop() || launchedPath;
+      updateGameStatus(gameId, {
+        status: "installed",
+        statusText: `Game launched: ${launchedName}`,
+        error: undefined,
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Failed to launch game.";
+      updateGameStatus(gameId, {
+        status: "error",
+        statusText: message,
+        error: message,
+      });
+    }
+  };
+
   const filteredGames = data?.games.filter((game) => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesGenre = selectedGenre === "All" || game.category.toLowerCase().includes(selectedGenre.toLowerCase());
@@ -732,6 +764,7 @@ export default function App() {
         onClose={() => setIsModalOpen(false)}
         onPathChange={handlePathChange}
         onInstall={handleInstall}
+        onLaunchGame={handleLaunchGame}
         onUninstall={handleUninstall}
       />
     </div>

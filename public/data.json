@@ -2,7 +2,8 @@
   "lastUpdated": "2026-04-20T03:58:24.784Z",
   "categories": [
     "Action",
-    "Adventure"
+    "Adventure",
+    "Indie"
   ],
   "games": [
     {
@@ -2350,7 +2351,304 @@
           "archiveFormat": "zip"
         }
       ]
+    },
+    {
+      "id": "the-baby-in-yellow",
+      "title": "The Baby In Yellow",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "You've got a new babysitting job, and things are taking a turn for the weird. Feed him, read him a bedtime story, and try not to fall into his dreams. How long can you stay in control?",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2291340/header.jpg?t=1763401770",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2291340/header.jpg?t=1763401770",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-baby-in-yellow-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Baby In Yellow.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "9.5 MB",
+          "author": "Polar Team",
+          "assetKey": "games/BabyInYellow/ar/v1/BabyInYellow.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "red-dead-redemption",
+      "title": "Red Dead Redemption",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "Experience the story of former outlaw John Marston as he tracks down the last remaining members of the notorious Van der Linde Gang in the PC debut of the critically acclaimed predecessor to Red Dead Redemption 2.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2668510/header.jpg?t=1741118459",
+      "executable": "",
+      "translations": [
+        {
+          "id": "red-dead-redemption-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for Red Dead Redemption.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "46.1 MB",
+          "author": "Polar Team",
+          "assetKey": "games/Red_Dead_Redemption/ar/v1/game.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "resident-evil-0",
+      "title": "Resident Evil 0",
+      "category": "Action",
+      "rating": 4,
+      "description": "Before the mansion, before the destruction of Raccoon City, there was Resident Evil 0. Now remastered with improved visuals and sounds, as well as the all-new Wesker Mode, there's never been a better time to experience the origins of the Resident Evil story.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/339340/header.jpg?t=1768953920",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/339340/header.jpg?t=1768953920",
+      "executable": "",
+      "translations": [
+        {
+          "id": "resident-evil-0-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for Resident Evil 0.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "25.6 MB",
+          "author": "Polar Team",
+          "assetKey": "games/Resident_Evil_0_HD_Remaster/ar/v1/Resident Evil 0 HD Remaster PC-74-1-1774719275.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "resident-evil",
+      "title": "Resident Evil",
+      "category": "Action",
+      "rating": 4.6,
+      "description": "The game that defined the survival-horror genre is back! Check out the remastered HD version of Resident Evil.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304240/header.jpg?t=1768956401",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/304240/header.jpg?t=1768956401",
+      "executable": "",
+      "translations": [
+        {
+          "id": "resident-evil-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for Resident Evil.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "49.9 MB",
+          "author": "Polar Team",
+          "assetKey": "games/Resident_Evil_HD_Remaster/ar/v1/nativePC.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "resident-evil-revelations-2",
+      "title": "Resident Evil Revelations 2",
+      "category": "Action",
+      "rating": 3.9,
+      "description": "RE Revelations 2 continues the series acclaimed essential survival horror experience, while uncovering startling truths.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287290/header.jpg?t=1769125412",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/287290/header.jpg?t=1769125412",
+      "executable": "",
+      "translations": [
+        {
+          "id": "resident-evil-revelations-2-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for Resident Evil Revelations 2.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "1.2 MB",
+          "author": "Polar Team",
+          "assetKey": "games/Resident_Evil_Revelations_2/ar/v1/res2rev.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "the-midnight-walk",
+      "title": "The Midnight Walk",
+      "category": "Adventure",
+      "rating": 4.7,
+      "description": "Follow The Midnight Walk in a dark adventure from the minds behind Lost in Random. Befriend a lost lantern creature and light your way through a world of wonder and terror. Outsmart monsters and marvel at details in a landscape handcrafted with real clay and animated in a stop motion style.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2863640/header.jpg?t=1768295345",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2863640/header.jpg?t=1768295345",
+      "executable": "",
+      "translations": [
+        {
+          "id": "the-midnight-walk-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Midnight Walk.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "1.1 MB",
+          "author": "Polar Team",
+          "assetKey": "games/The_Midnight_Walk/ar/v1/TheMidnightWalk.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "the-wolf-among-us",
+      "title": "The Wolf Among Us",
+      "category": "Action",
+      "rating": 4.9,
+      "description": "From the makers of the 2012 Game of the Year: The Walking Dead, comes a thriller based on the award-winning Fables comic books. As Bigby Wolf you will discover that a brutal, bloody murder is just a taste of things to come in a game series where your every decision can have enormous consequences.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250320/header.jpg?t=1734104991",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250320/header.jpg?t=1734104991",
+      "executable": "TWAU Final Version Arabization Horizons.exe",
+      "translations": [
+        {
+          "id": "the-wolf-among-us-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Wolf Among Us.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "62.4 MB",
+          "author": "Polar Team",
+          "assetKey": "games/The_Wolf_Among_Us/ar/v1/TWAU Final Version Arabization Horizons.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "crimson-desert",
+      "title": "Crimson Desert",
+      "category": "Action",
+      "rating": 4.2,
+      "description": "Crimson Desert is an open-world action-adventure set on the continent of Pywel. Join Kliff on his journey to rebuild the Greymane faction and to save the land from a looming threat. From vast wilderness and cities to ruins and the mysterious Abyss, forge your path through battles and discovery.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3321460/abd7dbdeaede8b6c9a6d40bf116ff2b883f2dd45/header.jpg?t=1776322395",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3321460/abd7dbdeaede8b6c9a6d40bf116ff2b883f2dd45/header.jpg?t=1776322395",
+      "executable": "CrimsonAR.exe",
+      "translations": [
+        {
+          "id": "crimson-desert-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for Crimson Desert.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "21.4 MB",
+          "author": "Polar Team",
+          "assetKey": "games/Crimson_Desert/ar/v1/CrimsonAR.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "the-walking-dead-season-two",
+      "title": "The Walking Dead: Season Two",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "The Walking Dead: Season Two continues the story of Clementine, a young girl orphaned by the undead apocalypse. Left to fend for herself, she has been forced to learn how to survive in a world gone mad.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261030/header.jpg?t=1729703055",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/261030/header.jpg?t=1729703055",
+      "executable": "Arabization Horizons - TWD S2 Full episodes.exe",
+      "translations": [
+        {
+          "id": "the-walking-dead-season-two-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Walking Dead: Season Two.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "168.9 MB",
+          "author": "Polar Team",
+          "assetKey": "games/The_Walking_Dead_Season_Two/ar/v1/Arabization Horizons - TWD S2 Full episodes.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "the-walking-dead-the-telltale-definitive-series",
+      "title": "The Walking Dead: The Telltale Definitive Series",
+      "category": "Adventure",
+      "rating": 4.8,
+      "description": "The Walking Dead: The Telltale Definitive Series contains all 4 Seasons, 400 Days, and The Walking Dead: Michonne, which includes over 50 hours of gameplay across 23 unique episodes.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1449690/header.jpg?t=1760651835",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1449690/header.jpg?t=1760651835",
+      "executable": "TWD-DF-S1 Arabization_Horizons.exe",
+      "translations": [
+        {
+          "id": "the-walking-dead-the-telltale-definitive-series-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Walking Dead: The Telltale Definitive Series.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "53.2 MB",
+          "author": "Polar Team",
+          "assetKey": "games/The_Walking_Dead_The_Telltale_Definitive_Series/ar/v1/TWD-DF-S1 Arabization_Horizons.zip",
+          "archiveFormat": "zip"
+        }
+      ]
+    },
+    {
+      "id": "the-walking-dead",
+      "title": "The Walking Dead",
+      "category": "Adventure",
+      "rating": 4.9,
+      "description": "A five-part adventure horror series set in the same universe as Robert Kirkman’s award-winning comic book series.",
+      "bannerImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/207610/header.jpg?t=1729702559",
+      "thumbnailImage": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/207610/header.jpg?t=1729702559",
+      "executable": "TWD S1 Full Episodes - Arabic - Arabization Horizons.exe",
+      "translations": [
+        {
+          "id": "the-walking-dead-ar-v1",
+          "name": "Arabic Translation Pack",
+          "version": "1.0.0",
+          "type": "community",
+          "description": "Community Arabic translation package for The Walking Dead.",
+          "releaseDate": "2026-04-21",
+          "changelog": [
+            "Latest Cloudflare package sync."
+          ],
+          "size": "45.3 MB",
+          "author": "Polar Team",
+          "assetKey": "games/The_Walking_dead/ar/v1/TWD S1 Full Episodes - Arabic - Arabization Horizons.zip",
+          "archiveFormat": "zip"
+        }
+      ]
     }
   ],
-  "contentVersion": "2026-04-21T03:37:16.606Z"
+  "contentVersion": "2026-04-21T07:14:25.457Z"
 }

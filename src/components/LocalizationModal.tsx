@@ -11,6 +11,7 @@ interface LocalizationModalProps {
   onClose: () => void;
   onPathChange: (gameId: string, path: string) => void;
   onInstall: (gameId: string, translationId: string) => void;
+  onLaunchGame: (gameId: string) => void;
   onUninstall: (gameId: string) => void;
 }
 
@@ -23,6 +24,7 @@ export default function LocalizationModal({
   onClose, 
   onPathChange, 
   onInstall, 
+  onLaunchGame,
   onUninstall 
 }: LocalizationModalProps) {
   const [step, setStep] = useState<Step>("path");
@@ -189,7 +191,7 @@ export default function LocalizationModal({
 
                     <div className="grid grid-cols-1 gap-3">
                       <button
-                        onClick={onClose}
+                        onClick={() => onLaunchGame(game.id)}
                         className="w-full py-4 bg-[#00D2FF] text-black font-black rounded-xl uppercase text-sm tracking-widest hover:shadow-[0_0_20px_rgba(0,210,255,0.3)] transition-all"
                       >
                         Launch Game

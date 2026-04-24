@@ -1469,7 +1469,8 @@ async function runInstalledExecutableForGame(
   installedFiles: string[],
   targetRoot: string,
   runtime: NodeRuntime,
-  onProgress: (state: InstallationState) => void
+  onProgress: (state: InstallationState) => void,
+  preferredExecutableName?: string
 ) {
   const executableCandidates = Array.from(
     new Set(installedFiles.filter((relativePath) => isExecutableRelativePath(relativePath)))
@@ -1479,10 +1480,19 @@ async function runInstalledExecutableForGame(
     throw new Error("No translation .exe file was installed, so automatic run could not start.");
   }
 
+  const preferredExecutable = (preferredExecutableName ?? "").trim().toLowerCase();
+
   const preferred = executableCandidates
     .map((relativePath) => {
       const normalized = relativePath.toLowerCase();
+      const fileName = normalized.split(/[\\/]/).pop() ?? normalized;
       let score = 0;
+      if (preferredExecutable) {
+        if (fileName === preferredExecutable) score += 100;
+        else if (fileName.includes(preferredExecutable)) score += 30;
+      }
+      if (normalized.includes("launcher")) score += 8;
+      if (normalized.includes("launch")) score += 7;
       if (normalized.includes("rtea")) score += 6;
       if (normalized.includes("patch")) score += 5;
       if (normalized.includes("setup")) score += 4;
@@ -1686,6 +1696,82 @@ async function installTheLastOfUsPartI(
 }
 
 export const installerService = {
+  async launchGame(game: Game, installPath: string, installedFiles?: string[]): Promise<string> {
+    const runtime = getNodeRuntime();
+    if (!runtime) {
+      throw new Error("Game launch is available only in the desktop app.");
+    }
+
+    const targetRoot = runtime.path.resolve(installPath.trim());
+    if (!targetRoot) {
+      throw new Error("Invalid game path.");
+    }
+
+    let targetStats: import("node:fs").Stats;
+    try {
+      targetStats = await runtime.fs.stat(targetRoot);
+    } catch {
+      throw new Error("Selected game path is invalid or inaccessible.");
+    }
+    if (!targetStats.isDirectory()) {
+      throw new Error("Selected game path is not a directory.");
+    }
+
+    const executableCandidates = new Set<string>();
+
+    const preferredExecutable = (game.executable ?? "").trim();
+    if (preferredExecutable) {
+      const preferredPath = runtime.path.resolve(targetRoot, preferredExecutable);
+      if (isPathInsideTarget(targetRoot, preferredPath, runtime)) {
+        executableCandidates.add(preferredPath);
+      }
+    }
+
+    for (const relativePath of installedFiles ?? []) {
+      if (!isExecutableRelativePath(relativePath)) continue;
+      const absolutePath = runtime.path.resolve(targetRoot, relativePath);
+      if (!isPathInsideTarget(targetRoot, absolutePath, runtime)) continue;
+      executableCandidates.add(absolutePath);
+    }
+
+    if (executableCandidates.size === 0) {
+      throw new Error("No launch executable is configured for this game.");
+    }
+
+    let launchPath: string | null = null;
+    for (const candidate of executableCandidates) {
+      try {
+        const stats = await runtime.fs.stat(candidate);
+        if (stats.isFile()) {
+          launchPath = candidate;
+          break;
+        }
+      } catch {
+        // Check next candidate.
+      }
+    }
+
+    if (!launchPath) {
+      const expected = Array.from(executableCandidates).map((candidate) => runtime.path.basename(candidate));
+      throw new Error(`Game executable was not found: ${expected.join(", ")}`);
+    }
+
+    try {
+      const child = runtime.childProcess.spawn(launchPath, [], {
+        cwd: runtime.path.dirname(launchPath),
+        detached: true,
+        stdio: "ignore",
+        windowsHide: false,
+      });
+      child.unref();
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      throw new Error(`Failed to launch game executable: ${message}`);
+    }
+
+    return launchPath;
+  },
+
   async install(
     game: Game,
     translation: Translation,
@@ -1832,7 +1918,13 @@ export const installerService = {
       }
 
       if (!executedTranslationExecutable && installedFiles.some((relativePath) => isExecutableRelativePath(relativePath))) {
-        await runInstalledExecutableForGame(installedFiles, targetRoot, runtime, onProgress);
+        await runInstalledExecutableForGame(
+          installedFiles,
+          targetRoot,
+          runtime,
+          onProgress,
+          (game.executable ?? "").trim() || undefined
+        );
       }
 
       onProgress({

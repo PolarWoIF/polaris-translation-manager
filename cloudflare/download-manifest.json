@@ -443,6 +443,61 @@
       "gameId": "uncharted-legacy-of-thieves-collection",
       "translationId": "uncharted-legacy-of-thieves-collection-ar-v1",
       "assetKey": "games/UNCHARTED_Legacy_of_Thieves_Collection/ar/v1/Uncharted4_data.zip"
+    },
+    {
+      "gameId": "the-baby-in-yellow",
+      "translationId": "the-baby-in-yellow-ar-v1",
+      "assetKey": "games/BabyInYellow/ar/v1/BabyInYellow.zip"
+    },
+    {
+      "gameId": "red-dead-redemption",
+      "translationId": "red-dead-redemption-ar-v1",
+      "assetKey": "games/Red_Dead_Redemption/ar/v1/game.zip"
+    },
+    {
+      "gameId": "resident-evil-0",
+      "translationId": "resident-evil-0-ar-v1",
+      "assetKey": "games/Resident_Evil_0_HD_Remaster/ar/v1/Resident Evil 0 HD Remaster PC-74-1-1774719275.zip"
+    },
+    {
+      "gameId": "resident-evil",
+      "translationId": "resident-evil-ar-v1",
+      "assetKey": "games/Resident_Evil_HD_Remaster/ar/v1/nativePC.zip"
+    },
+    {
+      "gameId": "resident-evil-revelations-2",
+      "translationId": "resident-evil-revelations-2-ar-v1",
+      "assetKey": "games/Resident_Evil_Revelations_2/ar/v1/res2rev.zip"
+    },
+    {
+      "gameId": "the-midnight-walk",
+      "translationId": "the-midnight-walk-ar-v1",
+      "assetKey": "games/The_Midnight_Walk/ar/v1/TheMidnightWalk.zip"
+    },
+    {
+      "gameId": "the-wolf-among-us",
+      "translationId": "the-wolf-among-us-ar-v1",
+      "assetKey": "games/The_Wolf_Among_Us/ar/v1/TWAU Final Version Arabization Horizons.zip"
+    },
+    {
+      "gameId": "crimson-desert",
+      "translationId": "crimson-desert-ar-v1",
+      "assetKey": "games/Crimson_Desert/ar/v1/CrimsonAR.zip"
+    },
+    {
+      "gameId": "the-walking-dead-season-two",
+      "translationId": "the-walking-dead-season-two-ar-v1",
+      "assetKey": "games/The_Walking_Dead_Season_Two/ar/v1/Arabization Horizons - TWD S2 Full episodes.zip"
+    },
+    {
+      "gameId": "the-walking-dead-the-telltale-definitive-series",
+      "translationId": "the-walking-dead-the-telltale-definitive-series-ar-v1",
+      "assetKey": "games/The_Walking_Dead_The_Telltale_Definitive_Series/ar/v1/TWD-DF-S1 Arabization_Horizons.zip"
+    },
+    {
+      "gameId": "the-walking-dead",
+      "translationId": "the-walking-dead-ar-v1",
+      "assetKey": "games/The_Walking_dead/ar/v1/TWD S1 Full Episodes - Arabic - Arabization Horizons.zip"
     }
   ]
 }
