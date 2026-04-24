@@ -51,6 +51,7 @@
     "artifactName": "Polar-Translation-${version}-${arch}.${ext}",
     "win": {
       "executableName": "Polar Translation",
+      "requestedExecutionLevel": "requireAdministrator",
       "target": [
         {
           "target": "nsis",
